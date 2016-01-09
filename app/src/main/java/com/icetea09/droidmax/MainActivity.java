@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.icetea09.droidmax.actions.BluetoothAction.BlueToothAction;
 import com.icetea09.droidmax.actions.ChangeWifiAction.WifiAction;
 import com.icetea09.droidmax.actions.GPSAction.GpsAction;
+import com.icetea09.droidmax.actions.PhoneModeActions.PhoneModeActions;
 
 public class MainActivity extends AppCompatActivity {
 
