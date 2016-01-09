@@ -2,7 +2,7 @@ package com.icetea09.droidmax.rules.weatherforecast;
 
 import android.util.Log;
 
-import com.icetea09.droidmax.Injection;
+import com.icetea09.droidmax.api.Api;
 import com.icetea09.droidmax.api.WeatherService;
 import com.icetea09.droidmax.model.Rule;
 import com.icetea09.droidmax.model.WeatherForecast;
@@ -29,7 +29,7 @@ public class TodayWeatherForecastRule extends WeatherForecastRule {
             return false;
         }
 
-        WeatherService weatherService = Injection.getApi().getWeatherService();
+        WeatherService weatherService = Api.getInstance().getWeatherService();
         retrofit.Call<WeatherForecast> call = weatherService.getWeatherForecastByLocation(String.valueOf(mCurrentLat),
                 String.valueOf(mCurrentLong), Constants.WEATHER_FORECAST_API_KEY);
         WeatherForecast weatherForecast = null;
