@@ -14,12 +14,9 @@ test:
          background: true
          parallel: true
     #- ./gradlew assembleDebug assembleRelease -PdisablePreDex
-    - circle-android wait-for-boot
-    - ./gradlew connectedAndroidTest
+     - circle-android wait-for-boot
+     - ./gradlew connectedAndroidTest
     #- ./gradlew testDebug --continue
-    - mv app/build/outputs $CIRCLE_ARTIFACTS
-    - mv app/build/outputs/apk/app-release.apk $CIRCLE_ARTIFACTS/app-release.apk
-     - mkdir $CIRCLE_ARTIFACTS/screenshots
-     - mkdir $CIRCLE_ARTIFACTS/androidTest
-    - cp -r app/build/outputs/reports/androidTests/connected $CIRCLE_ARTIFACTS/androidTest
+     - mv app/build/outputs $CIRCLE_ARTIFACTS
+     - cp -r app/build/outputs/reports/androidTests/connected $CIRCLE_ARTIFACTS
     #- cp -r app/build/test-results/debug/ $CIRCLE_TEST_REPORTS
