@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DroidMax</string>
+    <string name="app_name_debug">[D] DroidMax</string>
 </resources>
