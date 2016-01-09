@@ -1,13 +1,15 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.icetea09.droidmax.fragment.SelectActionFragment">
+    android:background="@color/fragment_background"
+    android:orientation="vertical"
+    tools:context="com.icetea09.droidmax.fragment.SelectConditionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <include layout="@layout/toolbar" />
+
+    <ExpandableListView
+        android:id="@+id/expandListviewAction"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+        android:layout_height="match_parent"></ExpandableListView>
+</LinearLayout>
