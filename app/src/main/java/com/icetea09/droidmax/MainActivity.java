@@ -8,7 +8,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.icetea09.droidmax.actions.BluetoothAction.BlueToothAction;
+import com.icetea09.droidmax.actions.ChangeWifiAction.WifiAction;
+import com.icetea09.droidmax.actions.GPSAction.GpsAction;
+import com.icetea09.droidmax.actions.PhoneModeActions.PhoneModeActions;
 import com.icetea09.droidmax.fragment.AddNewRuleFragment;
+import com.icetea09.droidmax.fragment.MyRulesFragment;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mFragmentManager = getSupportFragmentManager();
-        setFragment(AddNewRuleFragment.newInstance(), true);
+        setFragment(MyRulesFragment.newInstance(), true);
     }
 
     public void setFragment(Fragment fragment, boolean isAddToBackStack) {

@@ -12,6 +12,10 @@ import com.icetea09.droidmax.R;
 
 public class MyRulesFragment extends Fragment {
 
+    View rootView;
+    public static Fragment newInstance() {
+        return new MyRulesFragment();
+    }
 
     public MyRulesFragment() {
         // Required empty public constructor
@@ -22,7 +26,8 @@ public class MyRulesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_rules, container, false);
+        rootView = inflater.inflate(R.layout.fragment_my_rules, container, false);
+        return rootView;
     }
 
 }
