@@ -10,8 +10,8 @@ import com.icetea09.droidmax.actions.IAction;
  */
 public class WifiAction implements IAction{
 
-    Context mContext;
-    boolean mIsWifiEnable;
+    protected Context mContext;
+    protected boolean mIsWifiEnable;
     public WifiAction(Context context, boolean isWifiEnable){
         this.mContext = context;
         this.mIsWifiEnable = isWifiEnable;
