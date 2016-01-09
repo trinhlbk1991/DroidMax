@@ -42,4 +42,9 @@ public class BatteryRule implements IRule {
     public String getRuleDescription() {
         return TAG;
     }
+
+    @Override
+    public String getCategory() {
+        return TAG;
+    }
 }

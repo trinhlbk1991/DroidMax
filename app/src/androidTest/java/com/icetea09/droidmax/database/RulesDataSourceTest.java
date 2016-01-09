@@ -76,7 +76,7 @@ public class RulesDataSourceTest extends AndroidTestCase {
     private Rule createDummyRule(int id, String category) {
         String strConditions = new ChargerPluggedRule().convertToString() + Rule.ITEMS_SEPARATOR + new LowBatteryRule("15").convertToString();
         Rule rule = new Rule();
-        rule.setId(id);
+        rule.setId(String.valueOf(id));
         rule.setName("Test Rule");
         rule.setCategories(category);
         rule.setConditions(strConditions);

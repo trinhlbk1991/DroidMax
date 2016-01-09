@@ -19,18 +19,18 @@ public class Rule {
     public static final String ITEMS_SEPARATOR = "#";
     public static final String ARGS_SEPARATOR = "~";
 
-    private int mId;
+    private String mId;
     private String mName;
     private String[] mCategories;
     private List<IRule> mConditions;
     private List<IAction> mActions;
     private int mNumOfPerformed;
 
-    public int getId() {
+    public String getId() {
         return mId;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.mId = id;
     }
 
@@ -74,6 +74,10 @@ public class Rule {
         return result;
     }
 
+    public void setConditions(List<IRule> conditions) {
+        mConditions = conditions;
+    }
+
     public void setConditions(String strConditions) {
         mConditions = new ArrayList<>();
         String[] arrConditions = strConditions.split(ITEMS_SEPARATOR);
@@ -109,6 +113,10 @@ public class Rule {
     }
 
 
+    public void setActions(List<IAction> actions) {
+        mActions = actions;
+    }
+
     public void setActions(String strActions) {
         mActions = new ArrayList<>();
         String[] arrActions = strActions.split(ITEMS_SEPARATOR);
@@ -133,6 +141,25 @@ public class Rule {
 
     public void setNumOfPerformed(int mNumOfPerformed) {
         this.mNumOfPerformed = mNumOfPerformed;
+    }
+
+    public String getDescription() {
+        String description = "IF";
+        for (int i = 0; i < getConditions().size(); i++) {
+            description += " " + getConditions().get(i).getRuleDescription();
+            if (i < getConditions().size() - 1) {
+                description += " and ";
+            }
+        }
+
+        description += " THEN ";
+        for (int i = 0; i < getActions().size(); i++) {
+            description += " " + getActions().get(i).getActionDescription();
+            if (i < getActions().size() - 1) {
+                description += " and ";
+            }
+        }
+        return description;
     }
 
     private Pair<String, String[]> getClassNameAndArgsFromString(String str) {
