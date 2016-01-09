@@ -7,16 +7,16 @@ import android.net.NetworkInfo;
 /**
  * Created by Nam Nguyen on 09-Jan-16.
  */
-public class NetworkConnectionRule extends WifiRules {
+public class WifiConnectToAnyNetwork extends WifiRule {
 
-    public static final String TAG = NetworkConnectionRule.class.getName();
+    public static final String TAG = WifiConnectToAnyNetwork.class.getName();
 
     @Override
     public boolean isSatisfied() {
         return isNetworkConnected();
     }
 
-    public NetworkConnectionRule() {
+    public WifiConnectToAnyNetwork() {
         super("");
     }
 
@@ -24,16 +24,16 @@ public class NetworkConnectionRule extends WifiRules {
         ConnectivityManager cm = ((ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE));
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        if (netInfo != null) {
-            if (wifi.isConnected()) {
-                return true;
-            }
-        }
-        return false;
+        return netInfo != null && wifi.isConnected();
     }
 
     @Override
     public String convertToString() {
         return TAG;
+    }
+
+    @Override
+    public String getRuleDescription() {
+        return "Connect to any network";
     }
 }

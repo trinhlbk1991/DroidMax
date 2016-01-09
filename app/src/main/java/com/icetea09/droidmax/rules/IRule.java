@@ -9,4 +9,8 @@ public interface IRule {
 
     String convertToString();
 
+    int getIcon();
+
+    String getRuleDescription();
+
 }

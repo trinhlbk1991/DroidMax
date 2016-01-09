@@ -2,6 +2,7 @@ package com.icetea09.droidmax.rules.battery;
 
 import android.content.Intent;
 
+import com.icetea09.droidmax.R;
 import com.icetea09.droidmax.rules.IRule;
 
 /**
@@ -29,6 +30,16 @@ public class BatteryRule implements IRule {
 
     @Override
     public String convertToString() {
+        return TAG;
+    }
+
+    @Override
+    public int getIcon() {
+        return R.drawable.ic_battery;
+    }
+
+    @Override
+    public String getRuleDescription() {
         return TAG;
     }
 }

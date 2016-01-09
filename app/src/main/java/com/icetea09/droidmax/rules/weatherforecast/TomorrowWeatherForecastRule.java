@@ -52,4 +52,9 @@ public class TomorrowWeatherForecastRule extends WeatherForecastRule {
                 .append(mTriggerTime);
         return stringBuilder.toString();
     }
+
+    @Override
+    public String getRuleDescription() {
+        return "Tomorrow's weather is " + mWeatherValue;
+    }
 }

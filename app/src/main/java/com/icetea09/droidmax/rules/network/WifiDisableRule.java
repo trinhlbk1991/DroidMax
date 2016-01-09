@@ -6,11 +6,11 @@ import android.net.wifi.WifiManager;
 /**
  * Created by Nam Nguyen on 09-Jan-16.
  */
-public class WifiEnableRule extends WifiRule {
+public class WifiDisableRule extends WifiRule {
 
-    String TAG = WifiEnableRule.class.getName();
+    String TAG = WifiDisableRule.class.getName();
 
-    public WifiEnableRule() {
+    public WifiDisableRule() {
         super("");
     }
 
@@ -21,7 +21,7 @@ public class WifiEnableRule extends WifiRule {
 
     protected boolean isWifiEnable() {
         WifiManager wifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
-        return wifiManager != null && wifiManager.isWifiEnabled();
+        return wifiManager == null || !wifiManager.isWifiEnabled();
     }
 
     @Override
@@ -31,6 +31,6 @@ public class WifiEnableRule extends WifiRule {
 
     @Override
     public String getRuleDescription() {
-        return "Wifi turn on";
+        return "Wifi turn off";
     }
 }

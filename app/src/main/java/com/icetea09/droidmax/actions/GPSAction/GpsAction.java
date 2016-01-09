@@ -6,25 +6,25 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
 
-import com.icetea09.droidmax.actions.IAction;
-
 /**
  * Created by Nam Nguyen on 09-Jan-16.
  */
-public class GpsAction implements IAction{
+public class GpsAction {//implements IAction{
     protected boolean mIsGpsEnable;
     protected Context mContext;
     protected Activity mActivity;
-    public GpsAction(Context context, boolean isGpsEnable){
+
+    public GpsAction(Context context, boolean isGpsEnable) {
         this.mContext = context;
         this.mIsGpsEnable = isGpsEnable;
     }
-    @Override
+
+    //@Override
     public String convertToString() {
         return null;
     }
 
-    @Override
+    //@Override
     public void perform() {
         turnGPS(mIsGpsEnable);
     }
@@ -35,9 +35,9 @@ public class GpsAction implements IAction{
         mContext.sendBroadcast(intent);
     }
 
-    private void turnOnGPS(){
+    private void turnOnGPS() {
         String provider = Settings.Secure.getString(mContext.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-        if(!provider.contains("gps")){
+        if (!provider.contains("gps")) {
             //if gps is disabled
             final Intent poke = new Intent();
             poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");

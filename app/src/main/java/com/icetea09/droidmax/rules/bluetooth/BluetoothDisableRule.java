@@ -5,16 +5,16 @@ import android.bluetooth.BluetoothAdapter;
 /**
  * Created by Nam Nguyen on 09-Jan-16.
  */
-public class BluetoothEnableRule extends BluetoothRule {
+public class BluetoothDisableRule extends BluetoothRule {
 
-    public static final String TAG = BluetoothEnableRule.class.getName();
+    public static final String TAG = BluetoothDisableRule.class.getName();
 
     @Override
     public boolean isSatisfied() {
         return isBluetoothEnable();
     }
 
-    public BluetoothEnableRule() {
+    public BluetoothDisableRule() {
     }
 
     protected boolean isBluetoothEnable() {
@@ -22,7 +22,7 @@ public class BluetoothEnableRule extends BluetoothRule {
         if (mBluetoothAdapter == null) {
             // Device does not support Bluetooth
         } else {
-            if (mBluetoothAdapter.isEnabled()) {
+            if (!mBluetoothAdapter.isEnabled()) {
                 return true;
             }
         }
@@ -36,6 +36,6 @@ public class BluetoothEnableRule extends BluetoothRule {
 
     @Override
     public String getRuleDescription() {
-        return "Bluetooth turns on";
+        return "Bluetooth turns off";
     }
 }
