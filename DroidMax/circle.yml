@@ -1,0 +1,25 @@
+machine:
+  environment:
+    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx512m -XX:+HeapDumpOnOutOfMemoryError"'
+
+dependencies:
+  pre:
+    - echo y | android update sdk --no-ui --all --filter tool,extra-android-m2repository,extra-android-support,extra-google-google_play_services,extra-google-m2repository,android-23
+    - echo y | android update sdk --no-ui --all --filter build-tools-23.0.2
+
+test:
+  override:
+    # - echo n | android create avd -n circo -f -t android-19 --abi default/armeabi-v7a -c 200M
+    # - $ANDROID_HOME/tools/emulator -avd circo -no-boot-anim -no-audio -no-window:
+    #     background: true
+    #     parallel: true
+    - ./gradlew assembleDebug assembleRelease -PdisablePreDex
+    # - circle-android wait-for-boot
+    # - ./gradlew connectedAndroidTest
+    - ./gradlew testDebug --continue
+    - mv app/build/outputs/apk/app-debug.apk $CIRCLE_ARTIFACTS/app-debug.apk
+    - mv app/build/outputs/apk/app-release.apk $CIRCLE_ARTIFACTS/app-release.apk
+    # - mkdir $CIRCLE_ARTIFACTS/screenshots
+    # - mkdir $CIRCLE_ARTIFACTS/androidTest
+    # - cp -r app/build/outputs/reports/androidTests/connected $CIRCLE_ARTIFACTS/androidTest
+    - cp -r app/build/test-results/debug/ $CIRCLE_TEST_REPORTS
