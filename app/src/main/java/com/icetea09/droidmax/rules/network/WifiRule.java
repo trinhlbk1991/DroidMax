@@ -1,7 +1,6 @@
 package com.icetea09.droidmax.rules.network;
 
 import android.content.Context;
-import android.content.Intent;
 
 import com.icetea09.droidmax.R;
 import com.icetea09.droidmax.rules.IRule;
@@ -13,7 +12,6 @@ public class WifiRule implements IRule {
 
     public static final String TAG = WifiRule.class.getSimpleName();
 
-    protected Intent mIntent;
     protected Context mContext;
     protected String mWifiName;
 
@@ -24,10 +22,6 @@ public class WifiRule implements IRule {
 
     public WifiRule(String wifiName) {
         this.mWifiName = wifiName;
-    }
-
-    public void setIntent(Intent mIntent) {
-        this.mIntent = mIntent;
     }
 
     public void setContext(Context mContext) {

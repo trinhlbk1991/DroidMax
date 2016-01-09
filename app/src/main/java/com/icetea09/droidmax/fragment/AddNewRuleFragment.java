@@ -1,6 +1,7 @@
 package com.icetea09.droidmax.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -22,12 +23,14 @@ import com.icetea09.droidmax.component.ImageButton;
 import com.icetea09.droidmax.database.RulesDataSource;
 import com.icetea09.droidmax.model.Rule;
 import com.icetea09.droidmax.model.event.AddRuleEvent;
+import com.icetea09.droidmax.model.event.SelectConditionEvent;
 import com.icetea09.droidmax.rules.IRule;
-import com.icetea09.droidmax.rules.battery.LowBatteryRule;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import de.greenrobot.event.EventBus;
 
 
 public class AddNewRuleFragment extends Fragment implements View.OnClickListener {
@@ -88,14 +91,30 @@ public class AddNewRuleFragment extends Fragment implements View.OnClickListener
         mEtRuleName = (EditText) rootView.findViewById(R.id.et_rule_name);
     }
 
-    int index = 0;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
+    public void onEvent(SelectConditionEvent event) {
+        getActivity().onBackPressed();
+        addConditionToView(event.getRule());
+    }
 
     @Override
     public void onClick(View v) {
         if (v.equals(mBtnAddCondition.getRootView())) {
-            //TODO: Goto pick condition
-            //addConditionToView(new LowBatteryRule(String.valueOf(index++)));
-            //Toast.makeText(getActivity(), "Add Condition", Toast.LENGTH_SHORT).show();
             ((MainActivity) getActivity()).setFragment(SelectConditionFragment.newInstance(), true);
 
         } else if (v.equals(mBtnAddAction.getRootView())) {

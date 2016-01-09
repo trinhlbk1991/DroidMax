@@ -19,7 +19,7 @@ public class BluetoothRule implements IRule{
 
     @Override
     public String convertToString() {
-        return null;
+        return TAG;
     }
 
     @Override

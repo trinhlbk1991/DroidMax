@@ -13,9 +13,7 @@ import android.widget.ExpandableListView;
 
 import com.icetea09.droidmax.R;
 import com.icetea09.droidmax.adapters.ConditionExpandableListAdapter;
-import com.icetea09.droidmax.model.Rule;
 import com.icetea09.droidmax.rules.IRule;
-import com.icetea09.droidmax.rules.battery.BatteryRule;
 import com.icetea09.droidmax.rules.battery.ChargerPluggedRule;
 import com.icetea09.droidmax.rules.battery.ChargerUnpluggedRule;
 import com.icetea09.droidmax.rules.battery.LowBatteryRule;
@@ -27,7 +25,6 @@ import com.icetea09.droidmax.rules.network.WifiConnectToAnyNetwork;
 import com.icetea09.droidmax.rules.network.WifiConnectToSpecificNetwork;
 import com.icetea09.droidmax.rules.network.WifiDisableRule;
 import com.icetea09.droidmax.rules.network.WifiEnableRule;
-import com.icetea09.droidmax.rules.network.WifiRule;
 import com.icetea09.droidmax.rules.weatherforecast.TodayWeatherForecastRule;
 import com.icetea09.droidmax.rules.weatherforecast.TomorrowWeatherForecastRule;
 
@@ -42,7 +39,7 @@ public class SelectConditionFragment extends Fragment {
     ExpandableListView expandableLvCondition;
     ConditionExpandableListAdapter conditionExpandableListAdapter;
 
-    String [] categoryResource;
+    String[] categoryResource;
     List<String> mCategories;
     HashMap<String, List<IRule>> mRuleMap;
     List<IRule> iBatteryRules, iBluetoothRules, iLocationRules, iNetworkRules, iWeatherRules;
@@ -59,16 +56,16 @@ public class SelectConditionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mRootView = inflater.inflate(R.layout.fragment_select_condition, container, false);
-        expandableLvCondition = (ExpandableListView)mRootView.findViewById(R.id.expandListviewCondition);
+        expandableLvCondition = (ExpandableListView) mRootView.findViewById(R.id.expandListviewCondition);
         initViewToolbar(mRootView);
 
         mCategories = new ArrayList<String>();
         categoryResource = getResources().getStringArray(R.array.array_category_condition);
-        for (int  i = 0; i < categoryResource.length; i++){
+        for (int i = 0; i < categoryResource.length; i++) {
             mCategories.add(categoryResource[i]);
         }
 
-        mRuleMap = new HashMap<String, List<IRule>>();
+        mRuleMap = new HashMap<>();
 
         //Battery Rules
         iBatteryRules = createBatteryRules();
@@ -96,7 +93,7 @@ public class SelectConditionFragment extends Fragment {
         return mRootView;
     }
 
-    private List<IRule> createBatteryRules(){
+    private List<IRule> createBatteryRules() {
         List<IRule> iBatteryRules = new ArrayList<IRule>();
         ChargerPluggedRule chargerPluggedRule = new ChargerPluggedRule();
         ChargerUnpluggedRule chargerUnpluggedRule = new ChargerUnpluggedRule();
@@ -108,7 +105,7 @@ public class SelectConditionFragment extends Fragment {
         return iBatteryRules;
     }
 
-    private List<IRule> createBluetoothRules(){
+    private List<IRule> createBluetoothRules() {
         List<IRule> iRules = new ArrayList<IRule>();
         BluetoothDisableRule bluetoothDisableRule = new BluetoothDisableRule();
         BluetoothEnableRule bluetoothEnableRule = new BluetoothEnableRule();
@@ -117,16 +114,16 @@ public class SelectConditionFragment extends Fragment {
         return iRules;
     }
 
-    private List<IRule> createLocationRules(){
+    private List<IRule> createLocationRules() {
         List<IRule> iRules = new ArrayList<IRule>();
-        ArriveSpecificLocation arriveSpecificLocation = new ArriveSpecificLocation("Home","106.663353", "10.779658");
-        ExitSpecificLocation  exitSpecificLocation = new ExitSpecificLocation("Home","106.663353", "10.779658");
+        ArriveSpecificLocation arriveSpecificLocation = new ArriveSpecificLocation("Home", "106.663353", "10.779658");
+        ExitSpecificLocation exitSpecificLocation = new ExitSpecificLocation("Home", "106.663353", "10.779658");
         iRules.add(arriveSpecificLocation);
         iRules.add(exitSpecificLocation);
         return iRules;
     }
 
-    private List<IRule> createNetworkRules(){
+    private List<IRule> createNetworkRules() {
         List<IRule> iRules = new ArrayList<IRule>();
         WifiEnableRule wifiEnableRule = new WifiEnableRule();
         WifiDisableRule wifiDisableRule = new WifiDisableRule();
@@ -139,7 +136,7 @@ public class SelectConditionFragment extends Fragment {
         return iRules;
     }
 
-    private List<IRule> createWeatherRules(){
+    private List<IRule> createWeatherRules() {
         List<IRule> iRules = new ArrayList<IRule>();
         TodayWeatherForecastRule todayWeatherForecastRule = new TodayWeatherForecastRule("Rainy", "20:00");
         TomorrowWeatherForecastRule tomorrowWeatherForecastRule = new TomorrowWeatherForecastRule("Rainy", "20:00");
@@ -149,8 +146,8 @@ public class SelectConditionFragment extends Fragment {
     }
 
 
-    private void initViewToolbar(View rootView){
-        mToolbar = (Toolbar)rootView.findViewById(R.id.toolbar);
+    private void initViewToolbar(View rootView) {
+        mToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         AppCompatActivity activity = ((AppCompatActivity) getActivity());
         if (activity != null) {
             activity.setSupportActionBar(mToolbar);
