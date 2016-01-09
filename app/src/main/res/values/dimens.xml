@@ -1,4 +1,7 @@
 <resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="rule_cardview_margin">5dip</dimen>
+
 
     <!--Typical spacing between two views-->
     <dimen name="spacing_huge">32dp</dimen>
