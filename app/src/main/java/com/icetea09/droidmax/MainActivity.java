@@ -8,13 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.icetea09.droidmax.actions.BluetoothAction.BlueToothAction;
-import com.icetea09.droidmax.actions.ChangeWifiAction.WifiAction;
-import com.icetea09.droidmax.actions.GPSAction.GpsAction;
-import com.icetea09.droidmax.actions.PhoneModeActions.PhoneModeActions;
-import com.icetea09.droidmax.fragment.AddNewRuleFragment;
 import com.icetea09.droidmax.fragment.MainRuleFragment;
-import com.icetea09.droidmax.fragment.MyRulesFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction.setCustomAnimations(enter, exit, popEnter, popExit);
-            fragmentTransaction.replace(R.id.fragment_container, fragment, fragment.getClass().getSimpleName());
+            fragmentTransaction.add(R.id.fragment_container, fragment, fragment.getClass().getSimpleName());
             if (isAddToBackStack) {
                 fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
             }
@@ -50,6 +44,16 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    private boolean isFragmentVisible(String tag) {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        return fragment != null && fragment.getClass().getSimpleName().equalsIgnoreCase(tag);
     }
 
 }
