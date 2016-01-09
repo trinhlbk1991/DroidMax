@@ -13,4 +13,6 @@ public interface IRule {
 
     String getRuleDescription();
 
+    String getCategory();
+
 }

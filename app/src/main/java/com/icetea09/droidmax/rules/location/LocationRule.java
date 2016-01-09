@@ -46,4 +46,9 @@ public class LocationRule implements IRule {
     public String getRuleDescription() {
         return TAG;
     }
+
+    @Override
+    public String getCategory() {
+        return TAG;
+    }
 }

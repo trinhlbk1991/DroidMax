@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -16,11 +18,15 @@ import com.icetea09.droidmax.R;
 import com.icetea09.droidmax.actions.BluetoothAction.BlueToothAction;
 import com.icetea09.droidmax.actions.IAction;
 import com.icetea09.droidmax.component.ImageButton;
+import com.icetea09.droidmax.database.RulesDataSource;
+import com.icetea09.droidmax.model.Rule;
+import com.icetea09.droidmax.model.event.AddRuleEvent;
 import com.icetea09.droidmax.rules.IRule;
 import com.icetea09.droidmax.rules.battery.LowBatteryRule;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 public class AddNewRuleFragment extends Fragment implements View.OnClickListener {
@@ -32,12 +38,14 @@ public class AddNewRuleFragment extends Fragment implements View.OnClickListener
 
     private List<IRule> mRules;
     private List<IAction> mActions;
+    private RulesDataSource mRulesDs;
 
     private LinearLayout mContainerConditions;
     private LinearLayout mContainerActions;
     private ImageButton mBtnAddCondition;
     private ImageButton mBtnAddAction;
     private Toolbar mToolbar;
+    private EditText mEtRuleName;
 
     public AddNewRuleFragment() {
         // Required empty public constructor
@@ -51,6 +59,7 @@ public class AddNewRuleFragment extends Fragment implements View.OnClickListener
         initView(rootView);
         mRules = new ArrayList<>();
         mActions = new ArrayList<>();
+        mRulesDs = new RulesDataSource(getContext());
         return rootView;
     }
 
@@ -74,6 +83,8 @@ public class AddNewRuleFragment extends Fragment implements View.OnClickListener
         mBtnAddCondition.setOnClickListener(this);
         mBtnAddAction = (ImageButton) rootView.findViewById(R.id.btn_add_action);
         mBtnAddAction.setOnClickListener(this);
+        rootView.findViewById(R.id.btn_add_rule).setOnClickListener(this);
+        mEtRuleName = (EditText) rootView.findViewById(R.id.et_rule_name);
     }
 
     int index = 0;
@@ -83,12 +94,54 @@ public class AddNewRuleFragment extends Fragment implements View.OnClickListener
         if (v.equals(mBtnAddCondition.getRootView())) {
             //TODO: Goto pick condition
             addConditionToView(new LowBatteryRule(String.valueOf(index++)));
-            Toast.makeText(getActivity(), "Add Condition", Toast.LENGTH_SHORT).show();
         } else if (v.equals(mBtnAddAction.getRootView())) {
             //TODO: Goto pick action
             addActionToView(new BlueToothAction("true"));
-            Toast.makeText(getActivity(), "Add Action", Toast.LENGTH_SHORT).show();
+        } else if (v.getId() == R.id.btn_add_rule) {
+            addNewRule();
         }
+    }
+
+    private void addNewRule() {
+        String ruleName = mEtRuleName.getText().toString().trim();
+        if (TextUtils.isEmpty(ruleName)) {
+            Toast.makeText(getActivity(), "Rule name must be not empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (mRules.size() == 0) {
+            Toast.makeText(getActivity(), "Must select at least one condition", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (mActions.size() == 0) {
+            Toast.makeText(getActivity(), "Must select at least one action", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Rule rule = new Rule();
+        rule.setName(ruleName);
+        UUID uuid = UUID.randomUUID();
+        String randomUUIDString = uuid.toString();
+        rule.setId(randomUUIDString);
+        rule.setNumOfPerformed(0);
+        rule.setConditions(mRules);
+        rule.setActions(mActions);
+
+        String strCategories = "";
+        for (IRule r : mRules) {
+            strCategories += r.getCategory() + Rule.ITEMS_SEPARATOR;
+        }
+        strCategories = strCategories.substring(0, strCategories.length() - 1);
+        rule.setCategories(strCategories);
+
+        if (mRulesDs.addNewRule(rule)) {
+            Toast.makeText(getActivity(), "Added new rule successfully", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity(), "Added new rule failed", Toast.LENGTH_SHORT).show();
+        }
+        AddRuleEvent.fire(rule);
+        getActivity().onBackPressed();
     }
 
     private void addConditionToView(final IRule rule) {

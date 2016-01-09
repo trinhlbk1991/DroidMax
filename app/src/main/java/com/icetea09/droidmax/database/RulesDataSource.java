@@ -52,7 +52,7 @@ public class RulesDataSource {
             if (cursor.moveToFirst()) {
                 do {
                     Rule rule = new Rule();
-                    rule.setId(cursor.getInt(0));
+                    rule.setId(cursor.getString(0));
                     rule.setName(cursor.getString(1));
                     rule.setCategories(cursor.getString(2));
                     rule.setConditions(cursor.getString(3));
@@ -72,7 +72,7 @@ public class RulesDataSource {
         return result;
     }
 
-    public Rule getRuleById(int id) {
+    public Rule getRuleById(String id) {
         Rule rule = null;
         try {
             SQLiteDatabase db = mSQLiteHelper.getReadableDatabase();
@@ -80,7 +80,7 @@ public class RulesDataSource {
                     + SQLiteHelper.KEY_ID + "='" + id + "'", null);
             if (cursor.moveToFirst()) {
                 rule = new Rule();
-                rule.setId(cursor.getInt(0));
+                rule.setId(cursor.getString(0));
                 rule.setName(cursor.getString(1));
                 rule.setCategories(cursor.getString(2));
                 rule.setConditions(cursor.getString(3));

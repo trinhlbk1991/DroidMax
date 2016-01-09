@@ -19,18 +19,18 @@ public class Rule {
     public static final String ITEMS_SEPARATOR = "#";
     public static final String ARGS_SEPARATOR = "~";
 
-    private int mId;
+    private String mId;
     private String mName;
     private String[] mCategories;
     private List<IRule> mConditions;
     private List<IAction> mActions;
     private int mNumOfPerformed;
 
-    public int getId() {
+    public String getId() {
         return mId;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.mId = id;
     }
 
@@ -74,6 +74,10 @@ public class Rule {
         return result;
     }
 
+    public void setConditions(List<IRule> conditions) {
+        mConditions = conditions;
+    }
+
     public void setConditions(String strConditions) {
         mConditions = new ArrayList<>();
         String[] arrConditions = strConditions.split(ITEMS_SEPARATOR);
@@ -108,6 +112,10 @@ public class Rule {
         return result;
     }
 
+
+    public void setActions(List<IAction> actions) {
+        mActions = actions;
+    }
 
     public void setActions(String strActions) {
         mActions = new ArrayList<>();
