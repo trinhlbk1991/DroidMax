@@ -74,24 +74,7 @@ public class RuleRecyclerViewAdapter extends RecyclerView.Adapter<RuleRecyclerVi
         final Rule rule = mRules.get(position);
         holder.ivThumbRule.setImageResource(rule.getConditions().get(0).getIcon());
         holder.tvRuleName.setText(rule.getName());
-
-        String description = "IF";
-        for (int i = 0; i < rule.getConditions().size(); i++) {
-            description += " " + rule.getConditions().get(i).getRuleDescription();
-            if (i < rule.getConditions().size() - 1) {
-                description += " and ";
-            }
-        }
-
-        description += " THEN ";
-        for (int i = 0; i < rule.getActions().size(); i++) {
-            description += " " + rule.getActions().get(i).getActionDescription();
-            if (i < rule.getActions().size() - 1) {
-                description += " and ";
-            }
-        }
-
-        holder.tvRuleCondictionAction.setText(description);
+        holder.tvRuleCondictionAction.setText(rule.getDescription());
         holder.btnRuleEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

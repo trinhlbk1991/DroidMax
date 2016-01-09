@@ -143,6 +143,25 @@ public class Rule {
         this.mNumOfPerformed = mNumOfPerformed;
     }
 
+    public String getDescription() {
+        String description = "IF";
+        for (int i = 0; i < getConditions().size(); i++) {
+            description += " " + getConditions().get(i).getRuleDescription();
+            if (i < getConditions().size() - 1) {
+                description += " and ";
+            }
+        }
+
+        description += " THEN ";
+        for (int i = 0; i < getActions().size(); i++) {
+            description += " " + getActions().get(i).getActionDescription();
+            if (i < getActions().size() - 1) {
+                description += " and ";
+            }
+        }
+        return description;
+    }
+
     private Pair<String, String[]> getClassNameAndArgsFromString(String str) {
         String className = null;
         String[] args = null;
