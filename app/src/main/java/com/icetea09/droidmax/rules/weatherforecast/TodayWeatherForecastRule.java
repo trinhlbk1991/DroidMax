@@ -53,4 +53,9 @@ public class TodayWeatherForecastRule extends WeatherForecastRule {
                 .append(mTriggerTime);
         return stringBuilder.toString();
     }
+
+    @Override
+    public String getRuleDescription() {
+        return "Today's weather is " + mWeatherValue;
+    }
 }

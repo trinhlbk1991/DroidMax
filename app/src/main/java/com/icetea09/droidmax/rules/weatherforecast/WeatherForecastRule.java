@@ -1,5 +1,6 @@
 package com.icetea09.droidmax.rules.weatherforecast;
 
+import com.icetea09.droidmax.R;
 import com.icetea09.droidmax.rules.IRule;
 
 /**
@@ -32,5 +33,15 @@ public class WeatherForecastRule implements IRule {
     @Override
     public String convertToString() {
         return TAG;
+    }
+
+    @Override
+    public String getRuleDescription() {
+        return TAG;
+    }
+
+    @Override
+    public int getIcon() {
+        return R.drawable.ic_weather;
     }
 }

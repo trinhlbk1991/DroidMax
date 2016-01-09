@@ -3,22 +3,35 @@ package com.icetea09.droidmax.actions.BluetoothAction;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 
+import com.icetea09.droidmax.R;
 import com.icetea09.droidmax.actions.IAction;
+import com.icetea09.droidmax.model.Rule;
 
 /**
  * Created by Nam Nguyen on 09-Jan-16.
  */
-public class BlueToothAction implements IAction{
+public class BlueToothAction implements IAction {
+
+    public static final String TAG = BlueToothAction.class.getName();
 
     protected Context mContext;
     protected boolean mIsBluetoothEnable;
-    public BlueToothAction(Context context, boolean isBluetoothEnable){
-        this.mContext = context;
-        this.mIsBluetoothEnable = isBluetoothEnable;
+
+    public BlueToothAction(String isBluetoothEnable) {
+        this.mIsBluetoothEnable = Boolean.valueOf(isBluetoothEnable);
     }
+
+    public void setContext(Context mContext) {
+        this.mContext = mContext;
+    }
+
     @Override
     public String convertToString() {
-        return null;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(TAG)
+                .append(Rule.ARGS_SEPARATOR)
+                .append(mIsBluetoothEnable);
+        return stringBuilder.toString();
     }
 
     @Override
@@ -26,12 +39,21 @@ public class BlueToothAction implements IAction{
         turnBluetooth(mIsBluetoothEnable);
     }
 
-    private void turnBluetooth(boolean isBluetoothEnable){
+    private void turnBluetooth(boolean isBluetoothEnable) {
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (isBluetoothEnable){
+        if (isBluetoothEnable) {
             mBluetoothAdapter.enable();
-        }
-        else
+        } else
             mBluetoothAdapter.disable();
+    }
+
+    @Override
+    public int getIcon() {
+        return R.drawable.ic_bluetooth;
+    }
+
+    @Override
+    public String getActionDescription() {
+        return "Turn " + (mIsBluetoothEnable ? "on" : "off") + " the bluetooth";
     }
 }

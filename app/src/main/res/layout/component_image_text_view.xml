@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@drawable/selector_add_rule_button"
+    android:clickable="true"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/spacing_small"
+    android:paddingLeft="@dimen/spacing_normal"
+    android:paddingRight="@dimen/spacing_normal"
+    android:paddingTop="@dimen/spacing_small">
+
+    <ImageView
+        android:id="@+id/img_button_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:clickable="false"
+        android:src="@drawable/ic_add" />
+
+    <TextView
+        android:id="@+id/tv_text_value"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginRight="@dimen/spacing_normal"
+        android:layout_toLeftOf="@+id/btn_secondary"
+        android:layout_toRightOf="@id/img_button_icon"
+        android:clickable="false"
+        android:gravity="center_vertical"
+        android:text="@string/app_name"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/font_sub_head" />
+
+    <ImageView
+        android:id="@+id/btn_secondary"
+        android:layout_width="@dimen/extra_button_size"
+        android:layout_height="@dimen/extra_button_size"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/spacing_small"
+        android:src="@drawable/ic_remove" />
+
+</RelativeLayout>

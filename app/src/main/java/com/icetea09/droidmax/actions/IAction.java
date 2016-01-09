@@ -9,4 +9,8 @@ public interface IAction {
 
     String convertToString();
 
+    int getIcon();
+
+    String getActionDescription();
+
 }
