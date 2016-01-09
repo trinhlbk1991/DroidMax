@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <!--app color palette-->
+    <color name="primary">#02c7dc</color>
+    <color name="primary_dark">#00b5c8</color>
+    <color name="accent">#ffab00</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="divider_color">#B6B6B6</color>
+
+    <!-- grayscale -->
+    <color name="white">#FFFFFF</color>
+    <color name="gray_light">#ece9e9</color>
+    <color name="gray">#939393</color>
+    <color name="gray_dark">#5F5F5F</color>
+    <color name="light_black">#323232</color>
+    <color name="black">#000000</color>
+    <color name="black_87">#212121</color>
+    <color name="black_54">#757575</color>
+    <color name="black_70_percent">#B3000000</color>
+    <color name="black_50_percent">#80000000</color>
+
+
+    <!-- basic colors -->
+    <color name="green">#4CAF50</color>
+    <color name="light_green">#71c174</color>
+    <color name="blue">#2A91BD</color>
+    <color name="light_blue">#6dbddf</color>
+    <color name="orange">#ffab00</color>
+    <color name="light_orange">#ffc44d</color>
+    <color name="red">#FF432F</color>
+    <color name="light_red">#ff5e4d</color>
+
+    <!-- add rule / action button -->
+    <color name="add_rule_button_background_selected">#f2f2f2</color>
+
+    <color name="fragment_background">#f7f7f7</color>
+
 </resources>

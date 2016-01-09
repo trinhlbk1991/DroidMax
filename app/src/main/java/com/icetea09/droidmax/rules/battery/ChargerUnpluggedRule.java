@@ -22,4 +22,9 @@ public class ChargerUnpluggedRule extends BatteryRule {
     public String convertToString() {
         return TAG;
     }
+
+    @Override
+    public String getRuleDescription() {
+        return "Charger was unplugged";
+    }
 }

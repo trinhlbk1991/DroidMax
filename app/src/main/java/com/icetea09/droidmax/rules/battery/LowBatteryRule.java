@@ -31,4 +31,8 @@ public class LowBatteryRule extends BatteryRule {
         return stringBuilder.toString();
     }
 
+    @Override
+    public String getRuleDescription() {
+        return "Battery level lower than " + mBatteryLevel + "%";
+    }
 }

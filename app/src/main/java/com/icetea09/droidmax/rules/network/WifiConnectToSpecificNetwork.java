@@ -10,16 +10,16 @@ import com.icetea09.droidmax.model.Rule;
 /**
  * Created by Nam Nguyen on 09-Jan-16.
  */
-public class WifiSpecialConnected extends WifiRules {
+public class WifiConnectToSpecificNetwork extends WifiRule {
 
-    String TAG = WifiSpecialConnected.class.getName();
+    String TAG = WifiConnectToSpecificNetwork.class.getName();
 
     @Override
     public boolean isSatisfied() {
         return isWifiEnable();
     }
 
-    public WifiSpecialConnected(String wifiName) {
+    public WifiConnectToSpecificNetwork(String wifiName) {
         super(wifiName);
     }
 
@@ -44,5 +44,10 @@ public class WifiSpecialConnected extends WifiRules {
                 .append(Rule.ARGS_SEPARATOR)
                 .append(mWifiName);
         return stringBuilder.toString();
+    }
+
+    @Override
+    public String getRuleDescription() {
+        return "Connect to network with name: " + mWifiName;
     }
 }

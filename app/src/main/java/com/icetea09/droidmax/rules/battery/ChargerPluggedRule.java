@@ -23,4 +23,9 @@ public class ChargerPluggedRule extends BatteryRule {
     public String convertToString() {
         return TAG;
     }
+
+    @Override
+    public String getRuleDescription() {
+        return "Charger was plugged";
+    }
 }
