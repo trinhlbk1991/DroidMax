@@ -1,7 +1,6 @@
 package com.icetea09.droidmax.rules.battery;
 
 import android.content.Intent;
-import android.os.BatteryManager;
 
 import com.icetea09.droidmax.rules.IRule;
 
@@ -10,19 +9,26 @@ import com.icetea09.droidmax.rules.IRule;
  */
 public class BatteryRule implements IRule {
 
-    protected Intent mIntent;
-    protected int mBatteryLevel;
+    public static final String TAG = BatteryRule.class.getSimpleName();
 
-    public BatteryRule(Intent intent, int batteryLevel) {
-        mIntent = intent;
+    protected Intent mIntent;
+    protected String mBatteryLevel;
+
+    public BatteryRule(String batteryLevel) {
         mBatteryLevel = batteryLevel;
+    }
+
+    public void setIntent(Intent intent) {
+        mIntent = intent;
     }
 
     @Override
     public boolean isSatisfied() {
-        int batteryLevel = mIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        int batteryScale = mIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-        return batteryLevel / (float) batteryScale <= mBatteryLevel;
+        return false;
     }
 
+    @Override
+    public String convertToString() {
+        return TAG;
+    }
 }

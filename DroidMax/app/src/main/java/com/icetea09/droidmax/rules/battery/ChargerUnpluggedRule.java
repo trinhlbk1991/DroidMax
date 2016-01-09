@@ -7,8 +7,10 @@ import android.content.Intent;
  */
 public class ChargerUnpluggedRule extends BatteryRule {
 
-    public ChargerUnpluggedRule(Intent intent) {
-        super(intent, 0);
+    public static final String TAG = ChargerUnpluggedRule.class.getName();
+
+    public ChargerUnpluggedRule() {
+        super(String.valueOf(-1));
     }
 
     @Override
@@ -16,4 +18,8 @@ public class ChargerUnpluggedRule extends BatteryRule {
         return mIntent.getAction().equals(Intent.ACTION_POWER_DISCONNECTED);
     }
 
+    @Override
+    public String convertToString() {
+        return TAG;
+    }
 }
