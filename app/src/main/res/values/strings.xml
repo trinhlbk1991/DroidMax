@@ -15,5 +15,14 @@
     <string name="button_add_action">Add Action</string>
     <string name="button_add">Add Rule</string>
     <string name="title_add_new_rule">Add New Rule</string>
+    <string name="title_add_new_condition">Add New Condition</string>
+
+    <array name="array_category_condition">
+        <item>Battery</item>
+        <item>Bluetooth</item>
+        <item>Location</item>
+        <item>Network</item>
+        <item>Weather</item>
+    </array>
 
 </resources>
