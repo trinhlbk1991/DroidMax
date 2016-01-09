@@ -138,8 +138,8 @@ public class SelectConditionFragment extends Fragment {
 
     private List<IRule> createWeatherRules() {
         List<IRule> iRules = new ArrayList<IRule>();
-        TodayWeatherForecastRule todayWeatherForecastRule = new TodayWeatherForecastRule("Rainy", "20:00");
-        TomorrowWeatherForecastRule tomorrowWeatherForecastRule = new TomorrowWeatherForecastRule("Rainy", "20:00");
+        TodayWeatherForecastRule todayWeatherForecastRule = new TodayWeatherForecastRule("Clear", "20:00");
+        TomorrowWeatherForecastRule tomorrowWeatherForecastRule = new TomorrowWeatherForecastRule("Clear", "20:00");
         iRules.add(todayWeatherForecastRule);
         iRules.add(tomorrowWeatherForecastRule);
         return iRules;

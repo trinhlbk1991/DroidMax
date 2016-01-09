@@ -1,26 +1,24 @@
 package com.icetea09.droidmax;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.AnimRes;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.icetea09.droidmax.actions.WifiAction;
 import com.icetea09.droidmax.actions.IAction;
-import com.icetea09.droidmax.actions.PhoneModeActions;
 import com.icetea09.droidmax.actions.NotificationAction;
+import com.icetea09.droidmax.actions.PhoneModeActions;
+import com.icetea09.droidmax.actions.WifiAction;
 import com.icetea09.droidmax.fragment.MainRuleFragment;
 import com.icetea09.droidmax.model.Rule;
+import com.icetea09.droidmax.receiver.LocationChangedReceiver;
+import com.icetea09.droidmax.receiver.WeatherCheckReceiver;
 import com.icetea09.droidmax.rules.IRule;
 import com.icetea09.droidmax.rules.battery.BatteryRule;
 import com.icetea09.droidmax.rules.location.LocationRule;
@@ -43,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mFragmentManager = getSupportFragmentManager();
         setFragment(MainRuleFragment.newInstance(), false);
+
+        LocationChangedReceiver.setAlarm(getApplicationContext());
+        WeatherCheckReceiver.startAlarmManager(getApplicationContext());
     }
 
     public void setFragment(Fragment fragment, boolean isAddToBackStack) {
@@ -76,13 +77,14 @@ public class MainActivity extends AppCompatActivity {
         return fragment != null && fragment.getClass().getSimpleName().equalsIgnoreCase(tag);
     }
 
-    public static void doCheckAutoTasks(final Context context, final Intent intent, final List<Rule> rules) {
+    public static void doCheckAutoTasks(final Context context, final Intent intent, final Location currentLocation,
+                                        final List<Rule> rules) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 for (Rule rule : rules) {
                     Log.d(TAG, "Checking rule: " + rule.getName());
-                    setRequiredProperties(rule, context, intent);
+                    setRequiredProperties(rule, context, intent, currentLocation);
                     boolean isSatisfied = true;
                     for (IRule condition : rule.getConditions()) {
                         isSatisfied = condition.isSatisfied();
@@ -103,28 +105,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressWarnings("deprecation")
-    private static void setRequiredProperties(Rule rule, Context context, Intent intent) {
+    private static void setRequiredProperties(Rule rule, Context context, Intent intent, Location currentLocation) {
         for (IRule condition : rule.getConditions()) {
             if (condition instanceof BatteryRule) {
                 ((BatteryRule) condition).setIntent(intent);
             } else if (condition instanceof LocationRule) {
-                if (!(ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                        ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-                    LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-                    ((LocationRule) condition).setCurrentLocation(locationManager.getLastKnownLocation("network"));
-                }
+                ((LocationRule) condition).setCurrentLocation(currentLocation);
             } else if (condition instanceof WifiRule) {
                 ((WifiRule) condition).setContext(context);
             } else if (condition instanceof WeatherForecastRule) {
-                if (!(ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                        ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-                    LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-                    Location currentLocation = locationManager.getLastKnownLocation("network");
-                    if (currentLocation != null) {
-                        ((WeatherForecastRule) condition).setCurrentLocation(currentLocation.getLongitude(), currentLocation.getLatitude());
-                    } else {
-                        ((WeatherForecastRule) condition).setCurrentLocation(106, 10);
-                    }
+                if (currentLocation != null) {
+                    ((WeatherForecastRule) condition).setCurrentLocation(currentLocation.getLongitude(), currentLocation.getLatitude());
+                } else {
+                    ((WeatherForecastRule) condition).setCurrentLocation(106, 10);
                 }
             }
         }

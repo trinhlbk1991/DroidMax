@@ -35,9 +35,10 @@ public class ExitSpecificLocation extends LocationRule {
 
     protected boolean isExitSpecialLocation() {
         if (mCurrentLocation == null) {
+            Log.d(TAG, "mCurrentLocation == null");
             return false;
         }
-        Log.d(TAG, mCurrentLocation.distanceTo(mDestination) + "");
+        Log.d(TAG, "Distance: " + mCurrentLocation.distanceTo(mDestination));
         if (mCurrentLocation.distanceTo(mDestination) >= 1000) {
             return true;
         }

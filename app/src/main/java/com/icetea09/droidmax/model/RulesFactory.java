@@ -29,7 +29,11 @@ public class RulesFactory {
         Constructor<?> constructor;
 
         if (args != null && args.length > 0) {
-            constructor = ruleClass.getConstructor(String.class);
+            Class<?>[] arrArgsClass = new Class<?>[args.length];
+            for (int i = 0; i < arrArgsClass.length; i++) {
+                arrArgsClass[i] = String.class;
+            }
+            constructor = ruleClass.getConstructor(arrArgsClass);
             Object[] arguments = new Object[args.length];
             for (int i = 0; i < arguments.length; i++) {
                 arguments[i] = args[i];
@@ -46,7 +50,11 @@ public class RulesFactory {
         Constructor<?> constructor;
 
         if (args != null && args.length > 0) {
-            constructor = ruleClass.getConstructor(String.class);
+            Class<?>[] arrArgsClass = new Class<?>[args.length];
+            for (int i = 0; i < arrArgsClass.length; i++) {
+                arrArgsClass[i] = String.class;
+            }
+            constructor = ruleClass.getConstructor(arrArgsClass);
             Object[] arguments = new Object[args.length];
             for (int i = 0; i < arguments.length; i++) {
                 arguments[i] = args[i];

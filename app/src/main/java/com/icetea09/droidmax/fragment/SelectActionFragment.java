@@ -85,7 +85,7 @@ public class SelectActionFragment extends Fragment {
 
     private List<IAction> getPushNotificationActions() {
         List<IAction> iActions = new ArrayList<>();
-        NotificationAction notificationAction = new NotificationAction("Noti Title", "Noti Message");
+        NotificationAction notificationAction = new NotificationAction("Notification Title", "Notification Message");
         iActions.add(notificationAction);
         return iActions;
     }

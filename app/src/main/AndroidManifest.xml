@@ -34,6 +34,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="android.intent.action.BATTERY_CHANGED" />
+                <action android:name="android.intent.action.BATTERY_LOW" />
             </intent-filter>
         </receiver>
 
@@ -47,6 +49,18 @@
         <receiver android:name=".receiver.BluetoothReceiver">
             <intent-filter>
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receiver.LocationChangedReceiver">
+            <intent-filter>
+                <action android:name="LOCATION_CHECK_SERVICE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receiver.WeatherCheckReceiver">
+            <intent-filter>
+                <action android:name="WEATHER_CHECK_SERVICE" />
             </intent-filter>
         </receiver>
 
