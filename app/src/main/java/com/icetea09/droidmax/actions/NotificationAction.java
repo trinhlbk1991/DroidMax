@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.icetea09.droidmax.R;
 import com.icetea09.droidmax.model.Rule;
-import com.icetea09.droidmax.utils.NotificationUtil;
+import com.icetea09.droidmax.utils.NotificationUtils;
 
 /**
  * Created by Nam Nguyen on 09-Jan-16.
@@ -28,7 +28,7 @@ public class NotificationAction implements IAction {
 
     @Override
     public void perform() {
-        NotificationUtil.showNotification(mContext, mTitle, mMessage);
+        NotificationUtils.showNotification(mContext, mTitle, mMessage);
     }
 
     @Override

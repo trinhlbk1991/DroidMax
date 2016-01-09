@@ -36,6 +36,7 @@ android {
             testCoverageEnabled = true
             minifyEnabled false
             proguardFiles 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -137,8 +138,8 @@ task jacocoMockReport(type: JacocoReport, dependsOn: ['connectedCheck']) {
                       '**/Manifest*.*',
                       '**/*Test*.*',
                       'android/**/*.*',
-                      '**/billing/*.*',
-                      '**/basegameutils/*.*']
+                      '**/NotificationUtils.class',
+                      '**/Constants.class']
     def debugTree = fileTree(dir: "${project.buildDir}/intermediates/classes/debug", excludes: fileFilter)
     def mainSrc = "${project.projectDir}/src/main/java"
 
