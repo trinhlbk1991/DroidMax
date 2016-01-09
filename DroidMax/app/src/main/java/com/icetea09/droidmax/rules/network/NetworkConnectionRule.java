@@ -4,8 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.icetea09.droidmax.model.Rule;
-
 /**
  * Created by Nam Nguyen on 09-Jan-16.
  */
@@ -18,8 +16,8 @@ public class NetworkConnectionRule extends WifiRules {
         return isNetworkConnected();
     }
 
-    public NetworkConnectionRule(String wifiName) {
-        super(wifiName);
+    public NetworkConnectionRule() {
+        super("");
     }
 
     protected boolean isNetworkConnected() {
@@ -36,10 +34,6 @@ public class NetworkConnectionRule extends WifiRules {
 
     @Override
     public String convertToString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(TAG)
-                .append(Rule.ARGS_SEPARATOR)
-                .append(mWifiName);
-        return stringBuilder.toString();
+        return TAG;
     }
 }
