@@ -22,9 +22,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static final String KEY_NUM_OF_PERFORMED = "NumOfPerformed";
 
 
-
     private final String SQL_CREATE_TABLE_RULES = "CREATE TABLE IF NOT EXISTS "
-            + TABLE_RULES + "(" + KEY_ID + " INTEGER," + KEY_NAME + " TEXT,"
+            + TABLE_RULES + "(" + KEY_ID + " TEXT," + KEY_NAME + " TEXT,"
             + KEY_CATEGORIES + " TEXT, " + KEY_CONDITIONS + " TEXT, "
             + KEY_ACTIONS + " TEXT, " + KEY_NUM_OF_PERFORMED + " INTEGER, "
             + "PRIMARY KEY ('" + KEY_ID + "'))";

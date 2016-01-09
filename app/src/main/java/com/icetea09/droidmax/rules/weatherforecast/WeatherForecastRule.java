@@ -44,4 +44,9 @@ public class WeatherForecastRule implements IRule {
     public int getIcon() {
         return R.drawable.ic_weather;
     }
+
+    @Override
+    public String getCategory() {
+        return TAG;
+    }
 }
