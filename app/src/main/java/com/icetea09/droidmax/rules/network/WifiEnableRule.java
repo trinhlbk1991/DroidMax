@@ -20,6 +20,11 @@ public class WifiEnableRule extends WifiRule {
     }
 
     protected boolean isWifiEnable() {
+        if (mContext == null) {
+            return false;
+        }
+
+
         WifiManager wifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
         return wifiManager != null && wifiManager.isWifiEnabled();
     }

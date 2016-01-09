@@ -15,6 +15,9 @@ public class ChargerUnpluggedRule extends BatteryRule {
 
     @Override
     public boolean isSatisfied() {
+        if (mIntent == null) {
+            return false;
+        }
         return mIntent.getAction().equals(Intent.ACTION_POWER_DISCONNECTED);
     }
 

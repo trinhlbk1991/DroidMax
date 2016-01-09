@@ -1,7 +1,10 @@
 package com.icetea09.droidmax.model;
 
+import android.util.Log;
+
 import com.icetea09.droidmax.actions.IAction;
 import com.icetea09.droidmax.rules.IRule;
+import com.icetea09.droidmax.utils.StringUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -21,6 +24,7 @@ public class RulesFactory {
     }
 
     public IRule getCondition(String rule, String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Log.d(RulesFactory.class.getSimpleName(), rule + "-" + ((args != null && args.length > 0) ? StringUtils.convertStringArrayToStringWithDelimiter(args, "-") : ""));
         Class<?> ruleClass = Class.forName(rule);
         Constructor<?> constructor;
 

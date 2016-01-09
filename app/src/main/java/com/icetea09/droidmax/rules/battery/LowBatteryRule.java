@@ -17,6 +17,9 @@ public class LowBatteryRule extends BatteryRule {
 
     @Override
     public boolean isSatisfied() {
+        if (mIntent == null) {
+            return false;
+        }
         int batteryLevel = mIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         int batteryScale = mIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
         return batteryLevel / (float) batteryScale <= Integer.valueOf(mBatteryLevel);

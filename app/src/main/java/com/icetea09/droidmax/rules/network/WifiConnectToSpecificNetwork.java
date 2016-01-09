@@ -24,6 +24,11 @@ public class WifiConnectToSpecificNetwork extends WifiRule {
     }
 
     protected boolean isWifiEnable() {
+
+        if (mContext == null) {
+            return false;
+        }
+
         WifiManager wifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
         boolean isWifiConnected = wifiManager != null && wifiManager.isWifiEnabled();
 
