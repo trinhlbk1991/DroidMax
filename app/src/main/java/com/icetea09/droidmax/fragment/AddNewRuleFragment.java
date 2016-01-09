@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.icetea09.droidmax.MainActivity;
 import com.icetea09.droidmax.R;
 import com.icetea09.droidmax.actions.BluetoothAction.BlueToothAction;
 import com.icetea09.droidmax.actions.IAction;
@@ -93,7 +94,10 @@ public class AddNewRuleFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         if (v.equals(mBtnAddCondition.getRootView())) {
             //TODO: Goto pick condition
-            addConditionToView(new LowBatteryRule(String.valueOf(index++)));
+            //addConditionToView(new LowBatteryRule(String.valueOf(index++)));
+            //Toast.makeText(getActivity(), "Add Condition", Toast.LENGTH_SHORT).show();
+            ((MainActivity) getActivity()).setFragment(SelectConditionFragment.newInstance(), true);
+
         } else if (v.equals(mBtnAddAction.getRootView())) {
             //TODO: Goto pick action
             addActionToView(new BlueToothAction("true"));
