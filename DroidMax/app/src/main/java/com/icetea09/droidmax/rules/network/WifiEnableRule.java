@@ -1,9 +1,6 @@
 package com.icetea09.droidmax.rules.network;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
@@ -12,10 +9,10 @@ import android.util.Log;
  */
 public class WifiEnableRule extends WifiRules {
 
-    String TAG = WifiEnableRule.class.getSimpleName();
+    String TAG = WifiEnableRule.class.getName();
 
-    public WifiEnableRule(Context context, Intent intent, String wifiName) {
-        super(context, intent, wifiName);
+    public WifiEnableRule() {
+        super("");
     }
 
     @Override
@@ -23,9 +20,14 @@ public class WifiEnableRule extends WifiRules {
         return isWifiEnable();
     }
 
-    protected boolean isWifiEnable(){
+    protected boolean isWifiEnable() {
         Log.d(TAG, "isWifiEnable");
-        WifiManager wifiManager = (WifiManager)mContext.getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
         return wifiManager != null && wifiManager.isWifiEnabled();
+    }
+
+    @Override
+    public String convertToString() {
+        return TAG;
     }
 }

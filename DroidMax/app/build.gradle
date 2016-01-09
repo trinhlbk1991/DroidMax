@@ -16,7 +16,10 @@ android {
 
     signingConfigs {
         release {
-
+            storeFile file('E:/android-studio-workspace/eahack-droidmax/com.icetea09.droidmax.jks')
+            keyAlias 'com.icetea09.droidmax'
+            keyPassword 'icetea09'
+            storePassword 'icetea09'
         }
     }
 

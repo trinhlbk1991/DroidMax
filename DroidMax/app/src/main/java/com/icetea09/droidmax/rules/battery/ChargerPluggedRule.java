@@ -1,6 +1,5 @@
 package com.icetea09.droidmax.rules.battery;
 
-import android.content.Intent;
 import android.os.BatteryManager;
 
 /**
@@ -8,13 +7,20 @@ import android.os.BatteryManager;
  */
 public class ChargerPluggedRule extends BatteryRule {
 
-    public ChargerPluggedRule(Intent intent) {
-        super(intent, 0);
+    public static final String TAG = ChargerPluggedRule.class.getName();
+
+    public ChargerPluggedRule() {
+        super(String.valueOf(-1));
     }
 
     @Override
     public boolean isSatisfied() {
         int plugged = mIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
         return plugged == BatteryManager.BATTERY_PLUGGED_AC || plugged == BatteryManager.BATTERY_PLUGGED_USB;
+    }
+
+    @Override
+    public String convertToString() {
+        return TAG;
     }
 }

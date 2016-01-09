@@ -10,17 +10,31 @@ import com.icetea09.droidmax.rules.IRule;
  */
 public class WifiRules implements IRule {
 
+    public static final String TAG = WifiRules.class.getSimpleName();
+
     protected Intent mIntent;
     protected Context mContext;
     protected String mWifiName;
+
     @Override
     public boolean isSatisfied() {
         return false;
     }
 
-    public WifiRules(Context context, Intent intent, String wifiName){
-        this.mContext = context;
-        this.mIntent = intent;
-        this.mWifiName = mWifiName;
+    public WifiRules(String wifiName) {
+        this.mWifiName = wifiName;
+    }
+
+    public void setIntent(Intent mIntent) {
+        this.mIntent = mIntent;
+    }
+
+    public void setContext(Context mContext) {
+        this.mContext = mContext;
+    }
+
+    @Override
+    public String convertToString() {
+        return TAG;
     }
 }
