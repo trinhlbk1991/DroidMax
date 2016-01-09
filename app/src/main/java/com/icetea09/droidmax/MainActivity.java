@@ -15,10 +15,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.icetea09.droidmax.actions.ChangeWifiAction.WifiAction;
+import com.icetea09.droidmax.actions.WifiAction;
 import com.icetea09.droidmax.actions.IAction;
-import com.icetea09.droidmax.actions.PhoneModeActions.PhoneModeActions;
-import com.icetea09.droidmax.actions.PushNotificationAction.NotificationAction;
+import com.icetea09.droidmax.actions.PhoneModeActions;
+import com.icetea09.droidmax.actions.NotificationAction;
 import com.icetea09.droidmax.fragment.MainRuleFragment;
 import com.icetea09.droidmax.model.Rule;
 import com.icetea09.droidmax.rules.IRule;

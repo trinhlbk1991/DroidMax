@@ -1,10 +1,9 @@
-package com.icetea09.droidmax.actions.PhoneModeActions;
+package com.icetea09.droidmax.actions;
 
 import android.content.Context;
 import android.media.AudioManager;
 
 import com.icetea09.droidmax.R;
-import com.icetea09.droidmax.actions.IAction;
 import com.icetea09.droidmax.model.Rule;
 
 /**

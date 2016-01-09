@@ -1,4 +1,4 @@
-package com.icetea09.droidmax.actions.GPSAction;
+package com.icetea09.droidmax.actions;
 
 import android.app.Activity;
 import android.content.Context;

@@ -1,9 +1,8 @@
-package com.icetea09.droidmax.actions.PushNotificationAction;
+package com.icetea09.droidmax.actions;
 
 import android.content.Context;
 
 import com.icetea09.droidmax.R;
-import com.icetea09.droidmax.actions.IAction;
 import com.icetea09.droidmax.model.Rule;
 import com.icetea09.droidmax.utils.NotificationUtil;
 
