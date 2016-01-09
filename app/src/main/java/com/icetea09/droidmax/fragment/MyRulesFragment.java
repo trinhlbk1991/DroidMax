@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.icetea09.droidmax.MainActivity;
 import com.icetea09.droidmax.R;
 import com.icetea09.droidmax.adapters.RuleRecyclerViewAdapter;
 import com.icetea09.droidmax.model.Rule;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import de.greenrobot.event.EventBus;
 
 
-public class MyRulesFragment extends Fragment {
+public class MyRulesFragment extends Fragment implements View.OnClickListener {
 
     View rootView;
     ArrayList<Rule> rules;
@@ -38,12 +39,11 @@ public class MyRulesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_my_rules, container, false);
-        recyclerViewRules = (RecyclerView)rootView.findViewById(R.id.recyclerViewRules);
+        recyclerViewRules = (RecyclerView) rootView.findViewById(R.id.recyclerViewRules);
+        rootView.findViewById(R.id.fab_add_rule).setOnClickListener(this);
 
-        rules = new ArrayList<Rule>();
-
-
-        for (int i = 0; i < 2; i++){
+        rules = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
             Rule rule = new Rule();
             rule.setName("Rule Name " + i);
             rules.add(rule);
@@ -61,7 +61,16 @@ public class MyRulesFragment extends Fragment {
     public void onEvent(AddRuleEvent event) {
         rules.add(event.getRule());
         ruleRecyclerViewAdapter.notifyDataSetChanged();
-    };
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fab_add_rule:
+                ((MainActivity) getActivity()).setFragment(AddNewRuleFragment.newInstance(), true);
+                break;
+        }
+    }
 
     @Override
     public void onDestroy() {
