@@ -33,7 +33,6 @@ android {
         debug {
             testCoverageEnabled = true
             minifyEnabled false
-            signingConfig signingConfigs.release
             proguardFiles 'proguard-rules.pro'
             manifestPlaceholders = [
                     appName: "@string/app_name_debug"
