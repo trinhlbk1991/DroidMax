@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.icetea09.droidmax.R;
 import com.icetea09.droidmax.actions.IAction;
-import com.icetea09.droidmax.rules.IRule;
+import com.icetea09.droidmax.model.event.SelectActionEvent;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +21,8 @@ public class ActionExpandableListAdapter extends BaseExpandableListAdapter {
     Context _context;
     HashMap<String, List<IAction>> _listDataChild;
     List<String> _listDataHeader;
-    public ActionExpandableListAdapter(Context context, List<String> headerList, HashMap<String, List<IAction>> conditionMap){
+
+    public ActionExpandableListAdapter(Context context, List<String> headerList, HashMap<String, List<IAction>> conditionMap) {
         this._context = context;
         this._listDataHeader = headerList;
         this._listDataChild = conditionMap;
@@ -39,7 +40,7 @@ public class ActionExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        IAction iAction = (IAction)getChild(groupPosition, childPosition);
+        final IAction iAction = (IAction) getChild(groupPosition, childPosition);
         final String childText = iAction.getActionDescription();
 
         if (convertView == null) {
@@ -47,8 +48,16 @@ public class ActionExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.item_condition_child, null);
         }
 
-        TextView txtListChild = (TextView)convertView.findViewById(R.id.tvConditionChild);
+        TextView txtListChild = (TextView) convertView.findViewById(R.id.tvConditionChild);
         txtListChild.setText(childText);
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SelectActionEvent.fire(iAction);
+            }
+        });
+
         return convertView;
     }
 
@@ -74,17 +83,17 @@ public class ActionExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-            String headerTitle = (String) getGroup(groupPosition);
-            if (convertView == null) {
-                LayoutInflater infalInflater = (LayoutInflater) this._context
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = infalInflater.inflate(R.layout.item_condition_group, null);
-            }
+        String headerTitle = (String) getGroup(groupPosition);
+        if (convertView == null) {
+            LayoutInflater infalInflater = (LayoutInflater) this._context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = infalInflater.inflate(R.layout.item_condition_group, null);
+        }
 
-            TextView tvConditionHeader = (TextView) convertView.findViewById(R.id.tvConditionHeader);
-            tvConditionHeader.setText(headerTitle);
+        TextView tvConditionHeader = (TextView) convertView.findViewById(R.id.tvConditionHeader);
+        tvConditionHeader.setText(headerTitle);
 
-            return convertView;
+        return convertView;
     }
 
     @Override

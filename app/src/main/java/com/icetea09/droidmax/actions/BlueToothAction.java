@@ -1,10 +1,9 @@
-package com.icetea09.droidmax.actions.BluetoothAction;
+package com.icetea09.droidmax.actions;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 
 import com.icetea09.droidmax.R;
-import com.icetea09.droidmax.actions.IAction;
 import com.icetea09.droidmax.model.Rule;
 
 /**

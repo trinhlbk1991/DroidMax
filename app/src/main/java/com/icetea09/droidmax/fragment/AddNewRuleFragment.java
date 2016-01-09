@@ -17,12 +17,12 @@ import android.widget.Toast;
 
 import com.icetea09.droidmax.MainActivity;
 import com.icetea09.droidmax.R;
-import com.icetea09.droidmax.actions.BluetoothAction.BlueToothAction;
 import com.icetea09.droidmax.actions.IAction;
 import com.icetea09.droidmax.component.ImageButton;
 import com.icetea09.droidmax.database.RulesDataSource;
 import com.icetea09.droidmax.model.Rule;
 import com.icetea09.droidmax.model.event.AddRuleEvent;
+import com.icetea09.droidmax.model.event.SelectActionEvent;
 import com.icetea09.droidmax.model.event.SelectConditionEvent;
 import com.icetea09.droidmax.rules.IRule;
 
@@ -112,14 +112,17 @@ public class AddNewRuleFragment extends Fragment implements View.OnClickListener
         addConditionToView(event.getRule());
     }
 
+    public void onEvent(SelectActionEvent event) {
+        getActivity().onBackPressed();
+        addActionToView(event.getAction());
+    }
+
     @Override
     public void onClick(View v) {
         if (v.equals(mBtnAddCondition.getRootView())) {
             ((MainActivity) getActivity()).setFragment(SelectConditionFragment.newInstance(), true);
 
         } else if (v.equals(mBtnAddAction.getRootView())) {
-            //TODO: Goto pick action
-            //addActionToView(new BlueToothAction("true"));
             ((MainActivity) getActivity()).setFragment(SelectActionFragment.newInstance(), true);
         } else if (v.getId() == R.id.btn_add_rule) {
             addNewRule();

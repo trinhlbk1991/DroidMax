@@ -12,29 +12,26 @@ import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import com.icetea09.droidmax.MainActivity;
+import com.icetea09.droidmax.database.RulesDataSource;
+import com.icetea09.droidmax.model.Rule;
+import com.icetea09.droidmax.rules.location.LocationRule;
+
 import java.util.Calendar;
+import java.util.List;
 
-public class TimeCounterReceiver extends BroadcastReceiver {
+public class LocationChangedReceiver extends BroadcastReceiver {
 
-    private static final String TAG = TimeCounterReceiver.class.getSimpleName();
-    private static final int TIME_COUNTER = 1000 * 5 * 1; //milisecond * second * minute
+    private static final String TAG = LocationChangedReceiver.class.getSimpleName();
+    //private static final int TIME_COUNTER = 1000 * 5 * 1; //milisecond * second * minute
+    private static final int TIME_COUNTER = 15000; //milisecond * second * minute
 
     Calendar calendar;
     int currentHour;
 
     Context context;
-
     private LocationManager mLocationManager = null;
-//	private static final int LOCATION_INTERVAL = 3600000;
-//	private static final float LOCATION_DISTANCE = 5000f;
-
     Location currentLocation;
-
-
-//	LocationListener[] mLocationListeners = new LocationListener[] {
-//			new LocationListener(LocationManager.GPS_PROVIDER),
-//			new LocationListener(LocationManager.NETWORK_PROVIDER)
-//	};
 
     @SuppressWarnings("deprecation")
     @Override
@@ -43,48 +40,37 @@ public class TimeCounterReceiver extends BroadcastReceiver {
         this.context = context;
         calendar = Calendar.getInstance();
         currentHour = calendar.getTime().getHours();
-//		Log.d(TAG, "Calendar hour: " + calendar.getTime().getHours());
-        updateLocation(context);
+        updateLocation(context, intent);
     }
 
     @SuppressWarnings("unchecked")
-    public void updateLocation(final Context context) {
+    public void updateLocation(final Context context, final Intent intent) {
         this.context = context;
         initializeLocationManager();
-
-//		updateGPSLocation();
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         } else {
             currentLocation = mLocationManager.getLastKnownLocation("network");
-            if (currentLocation == null) {
-                Log.d(TAG, "Current Location == null");
-            } else {//Location is not null
-                Log.d(TAG, "Current Location != null");
-                Log.d(TAG, "Long: " + currentLocation.getLongitude() + " ----Lat: " + currentLocation.getLatitude());
-
-//				if(isLocationChange(currentLocation)){//Calculator Distance
-//					Log.d(TAG, "isLocationChange true");
-//				}
-//				else{
-//					Log.d(TAG, "isLocationChange false");
-//				}
+            if (currentLocation != null) {
+                Log.d(TAG, "Long: " + currentLocation.getLongitude() + " - Lat: " + currentLocation.getLatitude());
+                List<Rule> rules = new RulesDataSource(context).getRulesByCategory(LocationRule.TAG);
+                MainActivity.doCheckAutoTasks(context, intent, currentLocation, rules);
             }
         }
     }
 
 
-    public void setAlarm(Context context) {
+    public static void setAlarm(Context context) {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, TimeCounterReceiver.class);
+        Intent intent = new Intent("LOCATION_CHECK_SERVICE");
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
         am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), TIME_COUNTER, pi);
     }
 
-    public void cancelAlarm(Context context) {
-        Intent intent = new Intent(context, TimeCounterReceiver.class);
+    public static void cancelAlarm(Context context) {
+        Intent intent = new Intent("LOCATION_CHECK_SERVICE");
         PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(sender);

@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
 import com.icetea09.droidmax.R;
-import com.icetea09.droidmax.actions.BluetoothAction.BlueToothAction;
-import com.icetea09.droidmax.actions.ChangeWifiAction.WifiAction;
+import com.icetea09.droidmax.actions.BlueToothAction;
+import com.icetea09.droidmax.actions.WifiAction;
 import com.icetea09.droidmax.actions.IAction;
-import com.icetea09.droidmax.actions.PhoneModeActions.PhoneModeActions;
-import com.icetea09.droidmax.actions.PushNotificationAction.NotificationAction;
+import com.icetea09.droidmax.actions.PhoneModeActions;
+import com.icetea09.droidmax.actions.NotificationAction;
 import com.icetea09.droidmax.adapters.ActionExpandableListAdapter;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import java.util.List;
 
 public class SelectActionFragment extends Fragment {
 
-    public static Fragment newInstance(){
+    public static Fragment newInstance() {
         return new SelectActionFragment();
     }
 
@@ -38,44 +38,44 @@ public class SelectActionFragment extends Fragment {
     ExpandableListView expandableLvAction;
     ActionExpandableListAdapter actionExpandableListAdapter;
 
-    String [] categoryResource;
+    String[] categoryResource;
     List<String> mCategories;
     HashMap<String, List<IAction>> mActionMap;
-    List<IAction> iWifiActions, iBluetoothActions, iLocationActions, iPhoneModeActions, iNotiActions;
+    List<IAction> iWifiActions, iBluetoothActions, iLocationActions, iPhoneModeActions, iPushNotificationActions;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mRootView = inflater.inflate(R.layout.fragment_select_action, container, false);
-        expandableLvAction = (ExpandableListView)mRootView.findViewById(R.id.expandListviewAction);
+        expandableLvAction = (ExpandableListView) mRootView.findViewById(R.id.expandListviewAction);
         initViewToolbar(mRootView);
 
-        mCategories = new ArrayList<String>();
+        mCategories = new ArrayList<>();
         categoryResource = getResources().getStringArray(R.array.array_category_action);
-        for (int  i = 0; i < categoryResource.length; i++){
+        for (int i = 0; i < categoryResource.length; i++) {
             mCategories.add(categoryResource[i]);
         }
 
-        mActionMap = new HashMap<String, List<IAction>>();
+        mActionMap = new HashMap<>();
 
         //Bluetooth Actions
-        iBluetoothActions = getiBluetoothActions();
+        iBluetoothActions = getBluetoothActions();
         mActionMap.put(mCategories.get(0), iBluetoothActions);
 
         //Wifi Actions
-        iWifiActions = getiWifiActions();
+        iWifiActions = getWifiActions();
         mActionMap.put(mCategories.get(1), iWifiActions);
 
         //GPS Action TEMP
         mActionMap.put(mCategories.get(2), iWifiActions);
 
         //Phone Mode
-        iPhoneModeActions = getiPhoneModeActions();
+        iPhoneModeActions = getPhoneModeActions();
         mActionMap.put(mCategories.get(3), iPhoneModeActions);
 
         //Noti Action
-        iNotiActions = getiPushNotiActions();
-        mActionMap.put(mCategories.get(4), iNotiActions);
+        iPushNotificationActions = getPushNotificationActions();
+        mActionMap.put(mCategories.get(4), iPushNotificationActions);
 
         actionExpandableListAdapter = new ActionExpandableListAdapter(getActivity(), mCategories, mActionMap);
         expandableLvAction.setAdapter(actionExpandableListAdapter);
@@ -83,15 +83,15 @@ public class SelectActionFragment extends Fragment {
         return mRootView;
     }
 
-    private List<IAction> getiPushNotiActions(){
-        List<IAction> iActions = new ArrayList<IAction>();
-        NotificationAction notificationAction = new NotificationAction("Noti Title", "Noti Message");
+    private List<IAction> getPushNotificationActions() {
+        List<IAction> iActions = new ArrayList<>();
+        NotificationAction notificationAction = new NotificationAction("Notification Title", "Notification Message");
         iActions.add(notificationAction);
         return iActions;
     }
 
-    private List<IAction> getiPhoneModeActions(){
-        List<IAction> iActions = new ArrayList<IAction>();
+    private List<IAction> getPhoneModeActions() {
+        List<IAction> iActions = new ArrayList<>();
         PhoneModeActions phoneModeActionsNormal = new PhoneModeActions(PhoneModeActions.RINGER_MODE_NORMAL + "");
         PhoneModeActions phoneModeActionsVibrate = new PhoneModeActions(PhoneModeActions.RINGER_MODE_VIBRATE + "");
         PhoneModeActions phoneModeActionsSilent = new PhoneModeActions(PhoneModeActions.RINGER_MODE_SILENT + "");
@@ -101,8 +101,8 @@ public class SelectActionFragment extends Fragment {
         return iActions;
     }
 
-    private List<IAction> getiWifiActions(){
-        List<IAction> iActions = new ArrayList<IAction>();
+    private List<IAction> getWifiActions() {
+        List<IAction> iActions = new ArrayList<>();
         WifiAction wifiActionOn = new WifiAction("true");
         WifiAction wifiActionOff = new WifiAction("false");
         iActions.add(wifiActionOn);
@@ -110,8 +110,8 @@ public class SelectActionFragment extends Fragment {
         return iActions;
     }
 
-    private List<IAction> getiBluetoothActions(){
-        List<IAction> iActions = new ArrayList<IAction>();
+    private List<IAction> getBluetoothActions() {
+        List<IAction> iActions = new ArrayList<>();
         BlueToothAction blueToothActionOn = new BlueToothAction("true");
         BlueToothAction blueToothActionOff = new BlueToothAction("false");
         iActions.add(blueToothActionOn);
@@ -119,8 +119,8 @@ public class SelectActionFragment extends Fragment {
         return iActions;
     }
 
-    private void initViewToolbar(View rootView){
-        mToolbar = (Toolbar)rootView.findViewById(R.id.toolbar);
+    private void initViewToolbar(View rootView) {
+        mToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         AppCompatActivity activity = ((AppCompatActivity) getActivity());
         if (activity != null) {
             activity.setSupportActionBar(mToolbar);
