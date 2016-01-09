@@ -19,6 +19,6 @@ public class PowerConnectionReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         List<Rule> rules = new RulesDataSource(context).getRulesByCategory(BatteryRule.TAG);
-        MainActivity.doCheckAutoTasks(context, rules);
+        MainActivity.doCheckAutoTasks(context, intent, rules);
     }
 }

@@ -21,10 +21,6 @@ public class BlueToothAction implements IAction {
         this.mIsBluetoothEnable = Boolean.valueOf(isBluetoothEnable);
     }
 
-    public void setContext(Context mContext) {
-        this.mContext = mContext;
-    }
-
     @Override
     public String convertToString() {
         StringBuilder stringBuilder = new StringBuilder();

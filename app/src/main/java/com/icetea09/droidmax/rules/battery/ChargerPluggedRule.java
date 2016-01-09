@@ -15,6 +15,9 @@ public class ChargerPluggedRule extends BatteryRule {
 
     @Override
     public boolean isSatisfied() {
+        if (mIntent == null) {
+            return false;
+        }
         int plugged = mIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
         return plugged == BatteryManager.BATTERY_PLUGGED_AC || plugged == BatteryManager.BATTERY_PLUGGED_USB;
     }

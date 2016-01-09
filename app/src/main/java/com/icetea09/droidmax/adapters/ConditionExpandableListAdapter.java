@@ -8,6 +8,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.icetea09.droidmax.R;
+import com.icetea09.droidmax.model.event.SelectConditionEvent;
 import com.icetea09.droidmax.rules.IRule;
 
 import java.util.HashMap;
@@ -20,7 +21,8 @@ public class ConditionExpandableListAdapter extends BaseExpandableListAdapter {
     Context _context;
     HashMap<String, List<IRule>> _listDataChild;
     List<String> _listDataHeader;
-    public ConditionExpandableListAdapter(Context context, List<String> headerList, HashMap<String, List<IRule>> conditionMap){
+
+    public ConditionExpandableListAdapter(Context context, List<String> headerList, HashMap<String, List<IRule>> conditionMap) {
         this._context = context;
         this._listDataHeader = headerList;
         this._listDataChild = conditionMap;
@@ -38,7 +40,7 @@ public class ConditionExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        IRule iRule = (IRule)getChild(groupPosition, childPosition);
+        final IRule iRule = (IRule) getChild(groupPosition, childPosition);
         final String childText = iRule.getRuleDescription();
 
         if (convertView == null) {
@@ -46,8 +48,16 @@ public class ConditionExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.item_condition_child, null);
         }
 
-        TextView txtListChild = (TextView)convertView.findViewById(R.id.tvConditionChild);
+        TextView txtListChild = (TextView) convertView.findViewById(R.id.tvConditionChild);
         txtListChild.setText(childText);
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SelectConditionEvent.fire(iRule);
+            }
+        });
+
         return convertView;
     }
 
@@ -73,17 +83,17 @@ public class ConditionExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-            String headerTitle = (String) getGroup(groupPosition);
-            if (convertView == null) {
-                LayoutInflater infalInflater = (LayoutInflater) this._context
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = infalInflater.inflate(R.layout.item_condition_group, null);
-            }
+        String headerTitle = (String) getGroup(groupPosition);
+        if (convertView == null) {
+            LayoutInflater infalInflater = (LayoutInflater) this._context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = infalInflater.inflate(R.layout.item_condition_group, null);
+        }
 
-            TextView tvConditionHeader = (TextView) convertView.findViewById(R.id.tvConditionHeader);
-            tvConditionHeader.setText(headerTitle);
+        TextView tvConditionHeader = (TextView) convertView.findViewById(R.id.tvConditionHeader);
+        tvConditionHeader.setText(headerTitle);
 
-            return convertView;
+        return convertView;
     }
 
     @Override

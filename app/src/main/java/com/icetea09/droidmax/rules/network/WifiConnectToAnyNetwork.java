@@ -21,6 +21,10 @@ public class WifiConnectToAnyNetwork extends WifiRule {
     }
 
     protected boolean isNetworkConnected() {
+        if (mContext == null) {
+            return false;
+        }
+
         ConnectivityManager cm = ((ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE));
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);

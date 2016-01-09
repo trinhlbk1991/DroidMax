@@ -32,6 +32,9 @@ public class ArriveSpecificLocation extends LocationRule {
     }
 
     protected boolean isExitSpecialLocation() {
+        if (mCurrentLocation == null) {
+            return false;
+        }
         return mCurrentLocation.distanceTo(mDestination) >= 500;
     }
 
