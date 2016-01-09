@@ -46,8 +46,10 @@ android {
     productFlavors {
         mock {
             applicationIdSuffix = ".mock"
+            buildConfigField "String", "WEATHER_FORECAST_API_URL", '"xxx"'
         }
         prod {
+            buildConfigField "String", "WEATHER_FORECAST_API_URL", '"http://api.openweathermap.org/data/2.5/"'
         }
     }
 
