@@ -58,11 +58,11 @@ public class TimeCounterReceiver extends BroadcastReceiver {
 //		updateGPSLocation();
 
 		if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-				ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-				return;
-		}
-		else{
-			currentLocation = mLocationManager.getLastKnownLocation("network");
+                    ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+            else{
+                currentLocation = mLocationManager.getLastKnownLocation("network");
 			if (currentLocation == null) {
 				Log.d(TAG, "Current Location == null");
 			}
