@@ -72,6 +72,35 @@ public class RulesDataSource {
         return result;
     }
 
+    public List<Rule> getAllRules() {
+        List<Rule> result = new ArrayList<>();
+
+        try {
+            SQLiteDatabase db = mSQLiteHelper.getReadableDatabase();
+            Cursor cursor = db.rawQuery("SELECT * FROM " + SQLiteHelper.TABLE_RULES, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    Rule rule = new Rule();
+                    rule.setId(cursor.getString(0));
+                    rule.setName(cursor.getString(1));
+                    rule.setCategories(cursor.getString(2));
+                    rule.setConditions(cursor.getString(3));
+                    rule.setActions(cursor.getString(4));
+                    rule.setNumOfPerformed(cursor.getInt(5));
+                    result.add(rule);
+                } while (cursor.moveToNext());
+                cursor.close();
+                db.close();
+            }
+
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to get all rules");
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
     public Rule getRuleById(String id) {
         Rule rule = null;
         try {

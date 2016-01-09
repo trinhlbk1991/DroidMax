@@ -12,10 +12,11 @@ import android.view.ViewGroup;
 import com.icetea09.droidmax.MainActivity;
 import com.icetea09.droidmax.R;
 import com.icetea09.droidmax.adapters.RuleRecyclerViewAdapter;
+import com.icetea09.droidmax.database.RulesDataSource;
 import com.icetea09.droidmax.model.Rule;
 import com.icetea09.droidmax.model.event.AddRuleEvent;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
@@ -23,9 +24,10 @@ import de.greenrobot.event.EventBus;
 public class MyRulesFragment extends Fragment implements View.OnClickListener {
 
     View rootView;
-    ArrayList<Rule> rules;
+    List<Rule> mRules;
     RecyclerView recyclerViewRules;
     RuleRecyclerViewAdapter ruleRecyclerViewAdapter;
+    RulesDataSource mRulesDs;
 
     public static Fragment newInstance() {
         return new MyRulesFragment();
@@ -42,14 +44,10 @@ public class MyRulesFragment extends Fragment implements View.OnClickListener {
         recyclerViewRules = (RecyclerView) rootView.findViewById(R.id.recyclerViewRules);
         rootView.findViewById(R.id.fab_add_rule).setOnClickListener(this);
 
-        rules = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
-            Rule rule = new Rule();
-            rule.setName("Rule Name " + i);
-            rules.add(rule);
-        }
+        mRulesDs = new RulesDataSource(getContext());
+        mRules = mRulesDs.getAllRules();
 
-        ruleRecyclerViewAdapter = new RuleRecyclerViewAdapter(getActivity(), rules);
+        ruleRecyclerViewAdapter = new RuleRecyclerViewAdapter(getActivity(), mRules);
         recyclerViewRules.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewRules.setAdapter(ruleRecyclerViewAdapter);
 
@@ -59,7 +57,7 @@ public class MyRulesFragment extends Fragment implements View.OnClickListener {
     }
 
     public void onEvent(AddRuleEvent event) {
-        rules.add(event.getRule());
+        mRules.add(event.getRule());
         ruleRecyclerViewAdapter.notifyDataSetChanged();
     }
 
