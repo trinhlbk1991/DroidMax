@@ -10,8 +10,8 @@ import com.icetea09.droidmax.actions.IAction;
  */
 public class BlueToothAction implements IAction{
 
-    Context mContext;
-    boolean mIsBluetoothEnable;
+    protected Context mContext;
+    protected boolean mIsBluetoothEnable;
     public BlueToothAction(Context context, boolean isBluetoothEnable){
         this.mContext = context;
         this.mIsBluetoothEnable = isBluetoothEnable;
