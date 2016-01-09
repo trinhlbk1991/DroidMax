@@ -43,22 +43,17 @@ android {
         }
     }
 
-    productFlavors {
-        mock {
-            applicationIdSuffix = ".mock"
-            buildConfigField "String", "WEATHER_FORECAST_API_URL", '"xxx"'
-        }
-        prod {
-            buildConfigField "String", "WEATHER_FORECAST_API_URL", '"http://api.openweathermap.org/data/2.5/"'
-        }
+    packagingOptions {
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
     }
 
-    // Remove mockRelease as it's not needed.
-    android.variantFilter { variant ->
-        if (variant.buildType.name.equals('release')
-                && variant.getFlavors().get(0).name.equals('mock')) {
-            variant.setIgnore(true);
-        }
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4g"
     }
 
     // Always show the result of every unit test, even if it passes.
@@ -147,7 +142,7 @@ task jacocoMockReport(type: JacocoReport, dependsOn: ['connectedCheck']) {
                       'android/**/*.*',
                       '**/billing/*.*',
                       '**/basegameutils/*.*']
-    def debugTree = fileTree(dir: "${project.buildDir}/intermediates/classes/mock/debug", excludes: fileFilter)
+    def debugTree = fileTree(dir: "${project.buildDir}/intermediates/classes/debug", excludes: fileFilter)
     def mainSrc = "${project.projectDir}/src/main/java"
 
     sourceDirectories = files([mainSrc])
