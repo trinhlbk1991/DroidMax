@@ -19,5 +19,5 @@ test:
      - ./gradlew connectedAndroidTest
     #- ./gradlew testDebug --continue
      - mv app/build/outputs $CIRCLE_ARTIFACTS
-     - cp -r app/build/outputs/reports/androidTests/connected $CIRCLE_ARTIFACTS
+     - cp -r app/build/outputs/androidTest-results/connected $CIRCLE_ARTIFACTS
     #- cp -r app/build/test-results/debug/ $CIRCLE_TEST_REPORTS
