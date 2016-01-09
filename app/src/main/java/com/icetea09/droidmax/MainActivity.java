@@ -13,6 +13,7 @@ import com.icetea09.droidmax.actions.ChangeWifiAction.WifiAction;
 import com.icetea09.droidmax.actions.GPSAction.GpsAction;
 import com.icetea09.droidmax.actions.PhoneModeActions.PhoneModeActions;
 import com.icetea09.droidmax.fragment.AddNewRuleFragment;
+import com.icetea09.droidmax.fragment.MainRuleFragment;
 import com.icetea09.droidmax.fragment.MyRulesFragment;
 
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mFragmentManager = getSupportFragmentManager();
-        setFragment(MyRulesFragment.newInstance(), true);
+        setFragment(MainRuleFragment.newInstance(), false);
     }
 
     public void setFragment(Fragment fragment, boolean isAddToBackStack) {
