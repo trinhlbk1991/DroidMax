@@ -100,7 +100,8 @@ public class AddNewRuleFragment extends Fragment implements View.OnClickListener
 
         } else if (v.equals(mBtnAddAction.getRootView())) {
             //TODO: Goto pick action
-            addActionToView(new BlueToothAction("true"));
+            //addActionToView(new BlueToothAction("true"));
+            ((MainActivity) getActivity()).setFragment(SelectActionFragment.newInstance(), true);
         } else if (v.getId() == R.id.btn_add_rule) {
             addNewRule();
         }

@@ -16,6 +16,7 @@
     <string name="button_add">Add Rule</string>
     <string name="title_add_new_rule">Add New Rule</string>
     <string name="title_add_new_condition">Add New Condition</string>
+    <string name="title_add_new_action">Add New Action</string>
 
     <array name="array_category_condition">
         <item>Battery</item>
@@ -23,6 +24,14 @@
         <item>Location</item>
         <item>Network</item>
         <item>Weather</item>
+    </array>
+
+    <array name="array_category_action">
+        <item>Bluetooth</item>
+        <item>Wifi</item>
+        <item>GPS Location</item>
+        <item>Phone Mode</item>
+        <item>Push Notification</item>
     </array>
 
 </resources>
