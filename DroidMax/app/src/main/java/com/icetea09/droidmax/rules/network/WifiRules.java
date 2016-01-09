@@ -12,13 +12,15 @@ public class WifiRules implements IRule {
 
     protected Intent mIntent;
     protected Context mContext;
+    protected String mWifiName;
     @Override
     public boolean isSatisfied() {
         return false;
     }
 
-    public WifiRules(Context context, Intent intent){
+    public WifiRules(Context context, Intent intent, String wifiName){
         this.mContext = context;
         this.mIntent = intent;
+        this.mWifiName = mWifiName;
     }
 }

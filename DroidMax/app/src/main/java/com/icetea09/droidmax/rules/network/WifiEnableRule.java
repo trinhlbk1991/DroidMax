@@ -14,8 +14,8 @@ public class WifiEnableRule extends WifiRules {
 
     String TAG = WifiEnableRule.class.getSimpleName();
 
-    public WifiEnableRule(Context context, Intent intent) {
-        super(context, intent);
+    public WifiEnableRule(Context context, Intent intent, String wifiName) {
+        super(context, intent, wifiName);
     }
 
     @Override
@@ -27,9 +27,5 @@ public class WifiEnableRule extends WifiRules {
         Log.d(TAG, "isWifiEnable");
         WifiManager wifiManager = (WifiManager)mContext.getSystemService(Context.WIFI_SERVICE);
         return wifiManager != null && wifiManager.isWifiEnabled();
-
-//        ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo mWifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-//        return mWifi.isConnected();
     }
 }

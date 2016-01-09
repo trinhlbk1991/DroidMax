@@ -15,8 +15,8 @@ public class NetworkConnectionRule extends WifiRules {
         return isNetworkConnected();
     }
 
-    public NetworkConnectionRule(Context context, Intent intent) {
-        super(context, intent);
+    public NetworkConnectionRule(Context context, Intent intent, String wifiName) {
+        super(context, intent, wifiName);
     }
 
     protected boolean isNetworkConnected(){

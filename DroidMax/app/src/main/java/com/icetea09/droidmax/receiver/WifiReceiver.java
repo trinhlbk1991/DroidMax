@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.icetea09.droidmax.rules.network.NetworkConnectionRule;
 import com.icetea09.droidmax.rules.network.WifiEnableRule;
+import com.icetea09.droidmax.rules.network.WifiSpecialConnected;
 
 /**
  * Created by Nam Nguyen on 09-Jan-16.
