@@ -9,7 +9,7 @@
     <dimen name="spacing_normal">16dp</dimen>
     <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_tiny">4dp</dimen>
-    <dimen name="tab_height">35dip</dimen>
+    <dimen name="tab_height">45dip</dimen>
 
     <!--Font sizes-->
     <dimen name="font_button">15sp</dimen>

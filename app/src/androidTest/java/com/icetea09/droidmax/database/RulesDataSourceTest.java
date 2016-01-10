@@ -69,6 +69,23 @@ public class RulesDataSourceTest extends AndroidTestCase {
         assertEquals(4, rulesByCategory.size());
     }
 
+    public void testGetAllRules() {
+        List<Rule> rules = createDummyRules();
+        for (Rule rule : rules) {
+            assertTrue(mRulesDS.addNewRule(rule));
+        }
+        List<Rule> rulesByCategory = mRulesDS.getAllRules();
+        assertEquals(5, rulesByCategory.size());
+    }
+
+    public void testDeleteRule() {
+        Rule rule = createDummyRule();
+        assertTrue(mRulesDS.addNewRule(rule));
+        Rule savedRule = mRulesDS.getRuleById(rule.getId());
+        assertTrue(mRulesDS.deleteRule(savedRule));
+        assertEquals(0, mRulesDS.getAllRules().size());
+    }
+
     private Rule createDummyRule() {
         return createDummyRule(1, BatteryRule.TAG);
     }

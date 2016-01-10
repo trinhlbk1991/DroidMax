@@ -8,8 +8,6 @@ import com.icetea09.droidmax.model.Rule;
 import com.icetea09.droidmax.model.WeatherForecast;
 import com.icetea09.droidmax.utils.Constants;
 
-import java.io.IOException;
-
 /**
  * Created by KhanhTrinh on 1/9/2016.
  * MUST RUN ON BACKGROUND THREAD
@@ -32,15 +30,16 @@ public class TodayWeatherForecastRule extends WeatherForecastRule {
         WeatherService weatherService = Api.getInstance().getWeatherService();
         retrofit.Call<WeatherForecast> call = weatherService.getWeatherForecastByLocation(String.valueOf(mCurrentLat),
                 String.valueOf(mCurrentLong), Constants.WEATHER_FORECAST_API_KEY);
-        WeatherForecast weatherForecast = null;
+        WeatherForecast weatherForecast;
+        String todayWeather = null;
         try {
             weatherForecast = call.execute().body();
-            Log.d(TAG, "Weather: " + weatherForecast.list.get(0).weather.get(0).main);
-        } catch (IOException e) {
+            todayWeather = weatherForecast.list.get(0).weather.get(0).main;
+            Log.d(TAG, "Weather: " + todayWeather);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return weatherForecast != null && weatherForecast.list != null && weatherForecast.list.size() > 0
-                && weatherForecast.list.get(0).weather.get(0).main.equalsIgnoreCase(mWeatherValue);
+        return mWeatherValue.equalsIgnoreCase(todayWeather);
     }
 
     @Override

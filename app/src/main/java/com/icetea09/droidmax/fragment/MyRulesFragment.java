@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.icetea09.droidmax.BuildConfig;
 import com.icetea09.droidmax.MainActivity;
 import com.icetea09.droidmax.R;
 import com.icetea09.droidmax.adapters.RuleRecyclerViewAdapter;
@@ -16,6 +17,7 @@ import com.icetea09.droidmax.database.RulesDataSource;
 import com.icetea09.droidmax.model.Rule;
 import com.icetea09.droidmax.model.event.AddRuleEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -29,10 +31,6 @@ public class MyRulesFragment extends Fragment implements View.OnClickListener {
     RuleRecyclerViewAdapter ruleRecyclerViewAdapter;
     RulesDataSource mRulesDs;
 
-    public static Fragment newInstance() {
-        return new MyRulesFragment();
-    }
-
     public MyRulesFragment() {
         // Required empty public constructor
     }
@@ -45,7 +43,11 @@ public class MyRulesFragment extends Fragment implements View.OnClickListener {
         rootView.findViewById(R.id.fab_add_rule).setOnClickListener(this);
 
         mRulesDs = new RulesDataSource(getContext());
-        mRules = mRulesDs.getAllRules();
+        if (BuildConfig.DEBUG) {
+            mRules = new ArrayList<>();
+        } else {
+            mRules = mRulesDs.getAllRules();
+        }
 
         ruleRecyclerViewAdapter = new RuleRecyclerViewAdapter(getActivity(), mRules);
         recyclerViewRules.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -58,6 +60,7 @@ public class MyRulesFragment extends Fragment implements View.OnClickListener {
 
     public void onEvent(AddRuleEvent event) {
         mRules.add(event.getRule());
+        mRulesDs.addNewRule(event.getRule());
         ruleRecyclerViewAdapter.notifyDataSetChanged();
     }
 
@@ -66,6 +69,11 @@ public class MyRulesFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.fab_add_rule:
                 ((MainActivity) getActivity()).setFragment(AddNewRuleFragment.newInstance(), true);
+                if (BuildConfig.DEBUG) {
+                    mRules.clear();
+                    mRules.addAll(mRulesDs.getAllRules());
+                    ruleRecyclerViewAdapter.notifyDataSetChanged();
+                }
                 break;
         }
     }

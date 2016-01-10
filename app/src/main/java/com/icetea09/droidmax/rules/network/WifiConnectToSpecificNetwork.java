@@ -12,7 +12,7 @@ import com.icetea09.droidmax.model.Rule;
  */
 public class WifiConnectToSpecificNetwork extends WifiRule {
 
-    String TAG = WifiConnectToSpecificNetwork.class.getName();
+    public static String TAG = WifiConnectToSpecificNetwork.class.getName();
 
     @Override
     public boolean isSatisfied() {
@@ -24,7 +24,6 @@ public class WifiConnectToSpecificNetwork extends WifiRule {
     }
 
     protected boolean isWifiEnable() {
-
         if (mContext == null) {
             return false;
         }

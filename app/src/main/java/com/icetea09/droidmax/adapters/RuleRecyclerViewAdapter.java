@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.icetea09.droidmax.BuildConfig;
 import com.icetea09.droidmax.R;
 import com.icetea09.droidmax.database.RulesDataSource;
 import com.icetea09.droidmax.model.Rule;
@@ -91,6 +92,10 @@ public class RuleRecyclerViewAdapter extends RecyclerView.Adapter<RuleRecyclerVi
                 mRulesDs.deleteRule(rule);
             }
         });
+
+        if (BuildConfig.DEBUG) {
+            holder.btnRuleDelete.setText("Delete " + position);
+        }
     }
 
 

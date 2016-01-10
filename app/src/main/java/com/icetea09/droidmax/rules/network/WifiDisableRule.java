@@ -8,7 +8,7 @@ import android.net.wifi.WifiManager;
  */
 public class WifiDisableRule extends WifiRule {
 
-    String TAG = WifiDisableRule.class.getName();
+    public static final String TAG = WifiDisableRule.class.getName();
 
     public WifiDisableRule() {
         super("");

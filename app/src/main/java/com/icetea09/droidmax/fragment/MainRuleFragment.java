@@ -43,7 +43,7 @@ public class MainRuleFragment extends Fragment {
             activity.setSupportActionBar(mToolbar);
             ActionBar actionBar = activity.getSupportActionBar();
             if (actionBar != null) {
-                actionBar.setTitle(R.string.app_name);
+                actionBar.setTitle("DROIDMAX");
             }
         }
 

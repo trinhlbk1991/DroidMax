@@ -24,7 +24,7 @@ import com.icetea09.droidmax.rules.battery.BatteryRule;
 import com.icetea09.droidmax.rules.location.LocationRule;
 import com.icetea09.droidmax.rules.network.WifiRule;
 import com.icetea09.droidmax.rules.weatherforecast.WeatherForecastRule;
-import com.icetea09.droidmax.utils.NotificationUtil;
+import com.icetea09.droidmax.utils.NotificationUtils;
 
 import java.util.List;
 
@@ -72,11 +72,6 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private boolean isFragmentVisible(String tag) {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        return fragment != null && fragment.getClass().getSimpleName().equalsIgnoreCase(tag);
-    }
-
     public static void doCheckAutoTasks(final Context context, final Intent intent, final Location currentLocation,
                                         final List<Rule> rules) {
         new Thread(new Runnable() {
@@ -97,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                         for (IAction action : rule.getActions()) {
                             action.perform();
                         }
-                        NotificationUtil.showNotification(context, rule.getName(), rule.getDescription());
+                        NotificationUtils.showNotification(context, rule.getName(), rule.getDescription());
                     }
                 }
             }
