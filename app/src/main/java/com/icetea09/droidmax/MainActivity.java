@@ -72,11 +72,6 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private boolean isFragmentVisible(String tag) {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        return fragment != null && fragment.getClass().getSimpleName().equalsIgnoreCase(tag);
-    }
-
     public static void doCheckAutoTasks(final Context context, final Intent intent, final Location currentLocation,
                                         final List<Rule> rules) {
         new Thread(new Runnable() {
