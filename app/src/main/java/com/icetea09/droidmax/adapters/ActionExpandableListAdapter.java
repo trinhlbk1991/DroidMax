@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.icetea09.droidmax.R;
@@ -93,7 +94,29 @@ public class ActionExpandableListAdapter extends BaseExpandableListAdapter {
         TextView tvConditionHeader = (TextView) convertView.findViewById(R.id.tvConditionHeader);
         tvConditionHeader.setText(headerTitle);
 
+        ImageView ivHeader = (ImageView)convertView.findViewById(R.id.ivHeader);
+        ivHeader.setImageResource(getImageDrawable(headerTitle));
+
         return convertView;
+    }
+
+    private int getImageDrawable(String headerName){
+        if(headerName.equals("Bluetooth")){
+            return R.drawable.ic_bluetooth;
+        }
+        else if (headerName.equals("Phone Mode")){
+            return R.drawable.ic_phone;
+        }
+        else if (headerName.equals("GPS Location")){
+            return R.drawable.ic_location;
+        }
+        else if (headerName.equals("Wifi")){
+            return R.drawable.ic_wifi;
+        }
+        else if (headerName.equals("Push Notification")){
+            return R.drawable.ic_notification;
+        }
+        return R.drawable.ic_launcher;
     }
 
     @Override
