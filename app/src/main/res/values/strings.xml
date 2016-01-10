@@ -34,4 +34,10 @@
         <item>Push Notification</item>
     </array>
 
+    <array name="array_rule_tab">
+        <item>My Rule</item>
+        <item>Suggest</item>
+
+    </array>
+
 </resources>

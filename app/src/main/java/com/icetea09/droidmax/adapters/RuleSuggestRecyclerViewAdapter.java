@@ -67,8 +67,9 @@ public class RuleSuggestRecyclerViewAdapter extends RecyclerView.Adapter<RuleSug
 
     @Override
     public void onBindViewHolder(RuleViewHolder holder, final int position) {
-        holder.ivThumbRule.setImageResource(R.drawable.ic_launcher);
+        holder.ivThumbRule.setImageResource(mRules.get(position).getConditions().get(0).getIcon());
         holder.tvRuleName.setText(mRules.get(position).getName());
+        holder.tvRuleCondictionAction.setText(mRules.get(position).getDescription());
 
         holder.btnRuleEdit.setText("Add");
         holder.btnRuleEdit.setOnClickListener(new View.OnClickListener() {
