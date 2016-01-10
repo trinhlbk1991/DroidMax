@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view_my_rules"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fragment_background"
+    tools:context="com.icetea09.droidmax.fragment.MyRulesFragment">
+
+    <TextView
+        android:id="@+id/tv_no_rules"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_normal"
+        android:text="Create some rules by your own or pick some suggested by us!"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/font_body" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewRules"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_rule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        android:layout_marginRight="@dimen/spacing_normal"
+        android:src="@drawable/ic_add_white" />
+
+</RelativeLayout>
