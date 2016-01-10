@@ -1,10 +1,13 @@
 package com.icetea09.droidmax.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.icetea09.droidmax.R;
@@ -91,9 +94,32 @@ public class ConditionExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView tvConditionHeader = (TextView) convertView.findViewById(R.id.tvConditionHeader);
+        ImageView ivHeader = (ImageView)convertView.findViewById(R.id.ivHeader);
+
         tvConditionHeader.setText(headerTitle);
+        ivHeader.setImageResource(getImageDrawable(headerTitle));
+
 
         return convertView;
+    }
+
+    private int getImageDrawable(String headerName){
+        if(headerName.equals("Bluetooth")){
+            return R.drawable.ic_bluetooth;
+        }
+        else if (headerName.equals("Battery")){
+            return R.drawable.ic_battery;
+        }
+        else if (headerName.equals("Location")){
+            return R.drawable.ic_location;
+        }
+        else if (headerName.equals("Network")){
+            return R.drawable.ic_wifi;
+        }
+        else if (headerName.equals("Weather")){
+            return R.drawable.ic_weather;
+        }
+        return R.drawable.ic_launcher;
     }
 
     @Override
