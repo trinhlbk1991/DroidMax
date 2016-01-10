@@ -40,12 +40,6 @@
                 android:text="Condition"
                 android:textColor="@color/primary_text" />
 
-            <TextView
-                android:id="@+id/tvRuleAction"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary_text" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

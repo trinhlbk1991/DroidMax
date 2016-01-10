@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ea-droidmax.iml" filepath="$PROJECT_DIR$/ea-droidmax.iml" />
       <module fileurl="file://$PROJECT_DIR$/eahack-droidmax.iml" filepath="$PROJECT_DIR$/eahack-droidmax.iml" />
     </modules>
   </component>

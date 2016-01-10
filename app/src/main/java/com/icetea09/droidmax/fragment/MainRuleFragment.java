@@ -48,7 +48,7 @@ public class MainRuleFragment extends Fragment {
         }
 
         mViewPagerMainRule = (ViewPager) mRootView.findViewById(R.id.viewPagerMainRule);
-        mainRuleAdapter = new MainRuleViewPagerAdapter(getFragmentManager());
+        mainRuleAdapter = new MainRuleViewPagerAdapter(getFragmentManager(), getActivity());
         mViewPagerMainRule.setAdapter(mainRuleAdapter);
 
         return mRootView;
