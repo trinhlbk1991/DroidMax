@@ -6,15 +6,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.icetea09.droidmax.R;
-import com.icetea09.droidmax.fragment.MainRuleFragment;
 import com.icetea09.droidmax.fragment.MyRulesFragment;
 import com.icetea09.droidmax.fragment.SuggestionRulesFragment;
 
 /**
  * Created by Nam Nguyen on 09-Jan-16.
  */
-public class MainRuleViewPagerAdapter extends FragmentPagerAdapter{
+public class MainRuleViewPagerAdapter extends FragmentPagerAdapter {
     String[] mTabsTitle;
+
     public MainRuleViewPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         mTabsTitle = context.getResources().getStringArray(R.array.array_rule_tab);
@@ -27,7 +27,7 @@ public class MainRuleViewPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 return new MyRulesFragment();
             case 1:
