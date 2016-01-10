@@ -72,6 +72,8 @@ public class RuleSuggestRecyclerViewAdapter extends RecyclerView.Adapter<RuleSug
         holder.tvRuleCondictionAction.setText(mRules.get(position).getDescription());
 
         holder.btnRuleEdit.setText("Add");
+        holder.btnRuleEdit.setCompoundDrawablesWithIntrinsicBounds(mContext.getResources().getDrawable(R.drawable.ic_add_box_white), null, null, null);
+
         holder.btnRuleEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
