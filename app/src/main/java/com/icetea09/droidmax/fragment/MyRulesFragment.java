@@ -60,6 +60,7 @@ public class MyRulesFragment extends Fragment implements View.OnClickListener {
 
     public void onEvent(AddRuleEvent event) {
         mRules.add(event.getRule());
+        mRulesDs.addNewRule(event.getRule());
         ruleRecyclerViewAdapter.notifyDataSetChanged();
     }
 
